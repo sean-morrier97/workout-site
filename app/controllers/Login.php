@@ -23,6 +23,7 @@ class Login extends Controller{
 			$user->password_hash = password_hash($_POST['password'],PASSWORD_DEFAULT);
 			$user->dob = $_POST['dob'];
 			$user->privacy_setting = $_POST['ps'];
+			$user->status = 1;
 			$user->insert();
 
 			

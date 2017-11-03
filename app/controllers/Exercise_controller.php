@@ -19,10 +19,14 @@ class Exercise_controller extends Controller{
 			echo $exercise->posted_date;
 		}
     }
-	public function Main(){
-		//$this->view('Home/Main');
-		
-		echo 'here';
+	public function search(){
+		$exercise = $this->model('exercise');
+		$exercise->where('title', 'like', '$_POST[\'searchParam\']');
+		$exercise->orderby('title');
+		$results[] = $exercise->get();
+		for( $i = 0; $i<results.count(), $i++){
+			
+		}
 	}    
 }
 ?>

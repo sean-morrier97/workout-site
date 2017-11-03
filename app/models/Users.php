@@ -7,6 +7,7 @@ class users extends Model{
 	public $password_hash;
 	public $dob;
 	public $privacy_setting;
+	public $status;
 	
 	public function __construct(){
 		parent::__construct();	
