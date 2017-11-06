@@ -21,4 +21,5 @@ class workout_detail extends Model{
 		$this->$reps = $reps;
 		$this->$muscle_group = $muscle_group;
 	}
+
 }
