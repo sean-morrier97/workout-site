@@ -27,10 +27,69 @@ class Workout_controller extends Controller{
 		}
 	}
 	
-	private function findExerciseMuscleGroup($ID){
-		$exercise = $this->model('exercise');
-		$exercise->find($ID);
-		return $exercise->muscle_id;
+	private function findworkoutMuscleGroup($ID){
+		$workout = $this->model('workout');
+		$workout->find($ID);
+		return $workout->muscle_id;
+	}
+	
+	public function search(){
+		$workout = $this->model('workout');
+		$workout->where('title', 'like', '$_POST[\'searchParam\']');
+		$workout->orderby('title');
+		$results[] = $workout->get();
+		for( $i = 0; $i<results.count(), $i++){
+			
+		}
+	}   
+	
+	public function addToFavorites(){
+		if(isset($_POST['action'])){
+			$workout = $this->model('favorite_workout');
+			$workout->workout_id = $_POST['workout_id']; 
+			$workout->user_id = $_SESSION['userID'];
+			if($workout->doesExist() == null){
+				$workout->insert();
+			}else{
+				//display error message
+			}
+		}
+	}
+	
+	public function removeFromFavorites(){
+		if(isset($_POST['action'])){
+			$workout = $this->model('favorite_workout');
+			$workout->workout_id = $_POST['workout_id']; 
+			$workout->user_id = $_SESSION['userID'];
+			if($workout->doesExist() == null){
+				$workout->delete();
+			}else{
+				//display error message
+			}
+		}
+	}
+	
+	public function viewFavorites(){
+		$exercise = $this->model('favorite_workout');
+		$exercise->where('posted_id', '=', '$_SESSION[\'userID\']');
+		$results[] = $exercise->get();
+		for( $i = 0; $i<results.count(), $i++){
+				
+		}
+	}
+	
+	public function rateWorkout(){
+		if(isset($_POST['action'])){
+			$workout = $this->model('workout_rating');
+			$workout->workout_id = $_POST['workout_id']; 
+			$workout->user_id = $_SESSION['userID'];
+			$workout->rating = $_POST['rating'];
+			if($workout->doesExist() == null){
+				$workout->insert();
+			}else{
+				$workout->update();
+			}
+		}
 	}
 }
 ?>

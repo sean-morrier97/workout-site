@@ -12,4 +12,11 @@ class favorite_workout extends Model{
 		$this->$workout_id = $workout_id;
 		$this->$user_id = $user_id;
 	}
+	
+		
+	public function doesExist(){
+		parent::where('workout_id', '=', $exercise_id);
+		parent::where('user_id', '=', $user_id);
+		return parent::get();
+	}
 }

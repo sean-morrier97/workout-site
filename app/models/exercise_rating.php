@@ -14,4 +14,10 @@ class exercise_rating extends Model{
 		$this->$user_id = $user_id;
 		$this->$rating = $rating;		
 	}
+	
+	public function doesExist(){
+		parent::where('workout_id', '=', $exercise_id);
+		parent::where('user_id', '=', $user_id);
+		return parent::get();
+	}
 }
