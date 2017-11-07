@@ -12,8 +12,5 @@ class users extends Model{
 	public function __construct(){
 		parent::__construct();	
 	}
-	public function insert(){
-		parent::insert();
-	}
 	
 }
