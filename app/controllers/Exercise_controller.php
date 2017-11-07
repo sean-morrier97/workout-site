@@ -23,13 +23,11 @@ class Exercise_controller extends Controller{
 		if(isset($_POST['action'])){
 			$exercise = $this->model('exercise');
 			$exercise->where('title', 'like', '$_POST[\'searchParam\']');
-			$exercise->orderby('title');
-			$results[] = $exercise->get();
-			for( $i = 0; $i<results.count(), $i++){
-				
-			}
+			//$exercise->orderby('title');
+			$results = $exercise->get();
+			$this->view('Home/Main', ['searchResults'=>$results]);
 		}
-	}    
+	}
 	
 	public function addToFavorites(){
 		if(isset($_POST['action'])){
@@ -38,6 +36,7 @@ class Exercise_controller extends Controller{
 			$exercise->user_id = $_SESSION['userID'];
 			if($exercise->doesExist() == null){
 				$exercise->insert();
+				$this->view('Home/Main', ['searchResults'=>null]);
 			}else{
 				//display error message
 			}
@@ -47,7 +46,7 @@ class Exercise_controller extends Controller{
 	public function removeFromFavorites(){
 		if(isset($_POST['action'])){
 			$exercise = $this->model('favorite_exercises');
-			$exercise->workout_id = $_POST['exercise_id']; 
+			$exercise->exercise_id = $_POST['exercise_id']; 
 			$exercise->user_id = $_SESSION['userID'];
 			if($exercise->doesExist() == null){
 				$exercise->delete();
@@ -58,12 +57,17 @@ class Exercise_controller extends Controller{
 	}
 	
 	public function viewFavorites(){
-		$exercise = $this->model('favorite_exercises');
-		$exercise->where('poster_id', '=', '$_SESSION[\'userID\']');
-		$results[] = $exercise->get();
-		for( $i = 0; $i<results.count(), $i++){
-				
-		}
+		$fav_exercise = $this->model('favorite_exercises');
+		$fav_exercise->where('user_id', '=', '$_SESSION[\'userID\']');
+		$results = $fav_exercise->get();
+		//$exercise_id_list = array();
+		//for($i = 0; $i<count($results); $i++;){
+			
+		//}
+		/*$exercise = $this->model('exercise');
+		$exercise->where('exercise_id', 'in', results);
+		$results = $exercise->get();*/
+		$this->view('Exercises/fav_exercises', ['favorites'=>$results]);
 	}
 	
 	public function rateExercise(){
