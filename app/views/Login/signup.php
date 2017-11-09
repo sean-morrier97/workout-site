@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
 <form method="post" action="/Login/signup" class="form-horizontal">
 Username: <input type="text" name="username"><br>
-E-mail: <input type="text" name="email"><br>
+E-mail: <input type="email" name="email"><br>
 Password: <input type="password" name="password"><br>
 Date of birth: <input type="date" name="dob"><br>
 Privacy setting: <select name="privacy">

@@ -6,7 +6,8 @@ class Login extends Controller{
 			$username = $_POST['username'];
 			$password_hash = $_POST['password'];
 			LoginCore::login($username, $password_hash);
-			$this->view('Home/Main', ['searchResults'=>null]);
+			$this->view('home/Main', ['searchResults'=>null]);
+			header('location:/home/Main');
 		}else{
 			$this->view('Login/index');			
 		}
@@ -21,7 +22,7 @@ class Login extends Controller{
 			$user->email = $_POST['email'];
 			$user->password_hash = password_hash($_POST['password'],PASSWORD_DEFAULT);
 			$user->dob = $_POST['dob'];
-			$user->privacy_setting = $_POST['ps'];
+			$user->privacy_setting = "public";
 			$user->status = 1;
 			$user->insert();
 

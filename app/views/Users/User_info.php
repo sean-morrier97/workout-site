@@ -10,7 +10,10 @@
 	<th>Posts:</th>
 </tr>
 <?php
-foreach($data[''] as $){
-	
+foreach($data['users'] as $users){
+	echo "<tr><td>" .$users->username. "</td>";
+	echo "<td>" .$users->email. "</td>";
+	echo "<td>" .$users->dob. "</td>";
+	for($i = 0; $i <= )
 }
 ?>
