@@ -3,18 +3,14 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
-User Information:
+Followings:
 <tr>
-	<th>Username:</th>
-	<th>Email:</th>
-	<th>Date of Birth:</th>
-	<th>Posts:</th>
+    <th>Username:</th>
+    <th>Status:</th>
 </tr>
 <?php
-foreach($data['users'] as $users){
-	echo "<tr><td>" .$users->username. "</td>";
-	echo "<td>" .$users->email. "</td>";
-	echo "<td>" .$users->dob. "</td>";
-    echo "</tr>";
+foreach($data['following'] as $followee){
+    echo "<td><tr>" .$followee->followee_id. "</tr>";
+    echo "<tr>" .$followee->status. "</tr></td>";
 }
 ?>
