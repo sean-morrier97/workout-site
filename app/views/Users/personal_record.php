@@ -3,9 +3,14 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
-Favorite workouts
+Personal Information
+<tr>
+	<th>Exercise:</th>
+	<th>Record:</th>
+</tr>
 <?php
-foreach($data['favorite_workouts'] as $item){
-	echo $item->workout_id;
+foreach($data['personal_record'] as $item){
+	echo "<tr><td>" .$item->exercise_id. "</td>";
+	echo "<td>" .$item->record. "</td></tr>";
 }
 ?>
