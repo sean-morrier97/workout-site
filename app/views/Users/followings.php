@@ -10,7 +10,7 @@ Followings:
 </tr>
 <?php
 foreach($data['following'] as $followee){
-    echo "<td><tr>" .$followee->followee_id. "</tr>";
-    echo "<tr>" .$followee->status. "</tr></td>";
+    echo "<form method=\"post\" action=\"/UserController/listOfFollowings\" class=\"form-horizontal\"><tr><td>" .$followee->followee_id. "</td>";
+    echo "<td>" .$followee->status. "</td></tr></form>";
 }
 ?>
