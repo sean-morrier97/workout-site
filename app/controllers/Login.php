@@ -16,21 +16,25 @@ class Login extends Controller{
 
 	public function signup(){
 		$user = $this->model('Users');
-		if(isset($_POST['action'])){
-			$user->id = 0;
-			$user->username = $_POST['username'];
-			$user->email = $_POST['email'];
-			$user->password_hash = password_hash($_POST['password'],PASSWORD_DEFAULT);
-			$user->dob = $_POST['dob'];
-			$user->privacy_setting = "public";
-			$user->status = 1;
-			$user->insert();
+		try{
+			if(isset($_POST['action'])){
+				$user->id = 0;
+				$user->username = $_POST['username'];
+				$user->email = $_POST['email'];
+				$user->password_hash = password_hash($_POST['password'],PASSWORD_DEFAULT);
+				$user->dob = $_POST['dob'];
+				$user->privacy_setting = "public";
+				$user->status = 1;
+				$user->insert();
 
-			
-			header('location:/home/Main');
-			
-		}else
-			$this->view('Login/signup');
+				
+				header('location:/home/Main');
+				
+			}else
+				$this->view('Login/signup');
+		}catch (Exception $e){
+			$this->view('Login/signup');			
+		}
 	}
 	
 	public function logout(){

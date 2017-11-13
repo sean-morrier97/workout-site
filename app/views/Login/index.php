@@ -7,12 +7,8 @@
 Username: <input type="text" name="username"><br>
 Password: <input type="password" name="password"><br>
 <input type="submit" value="Login" name="action">
-<input type="submit" value="Register" name="action" onclick="http://localhost/Login/signup">
-<button id="register" class="float-left submit-button">Register</button>
-<script type="text/javascript">
-	document.getElementById("register").onclick = function(){
-		location.href = "http://localhost/Login/signup";
-	};
-</script>
+</form>
+<form action="/Login/signup" method="POST">
+<input type="submit" value="Register" name="action">
 </form>
 <br/>

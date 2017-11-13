@@ -9,11 +9,4 @@ class following extends Model{
 	public function __construct(){
 		parent::__construct();
 	}
-	
-	public function following($id, $follower_id, $followee_id, $status){
-		$this->$id = $id;
-		$this->$follower_id = $follower_id;
-		$this->$followee_id = $followee_id;
-		$this->$status = $status;
-	}
 }

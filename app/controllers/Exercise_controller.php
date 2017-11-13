@@ -60,13 +60,6 @@ class Exercise_controller extends Controller{
 		$fav_exercise = $this->model('favorite_exercises');
 		$fav_exercise->where('user_id', '=', '$_SESSION[\'userID\']');
 		$results = $fav_exercise->get();
-		//$exercise_id_list = array();
-		//for($i = 0; $i<count($results); $i++;){
-			
-		//}
-		/*$exercise = $this->model('exercise');
-		$exercise->where('exercise_id', 'in', results);
-		$results = $exercise->get();*/
 		$this->view('Exercises/fav_exercises', ['favorites'=>$results]);
 	}
 	
