@@ -51,6 +51,37 @@ class User_controller extends Controller{
 	}
 	
 	public function listOfFollowers(){
-		
+		$user = $this->model('following');
+		$user->where('followee_id', '=', '$_SESSION[\'userID\']');
+		$results = $user->get();
+		$this->view('Users/followers', ['followers'=>$results]);
+	}
+	
+	public function listOfFollowees(){
+		$user = $this->model('following');
+		$user->where('follower_id', '=', '$_SESSION[\'userID\']');
+		$results = $user->get();
+		$this->view('Users/followings', ['followees'=>$results]);
+	}
+	
+	public function viewProfile(){
+		$user = $this->model('Users');
+		$user->id = $_POST['userID'];
+		$result = $user->get();
+		$resultingUser = $result[0];
+		if($resultingUser->status == 1){
+			$following = $this->model('following');
+			$following->where('follower_id', '=', '$_SESSION[\'userID\']');
+			$following->where('followee_id', '=', '$_POST[\'userID\']');
+			$result = $following->get();
+			if(count($result)){
+				$this->view('Users/User_info', ['user'=>null]);				
+			}else{
+				if($result[0]->status == 1)
+					this->view('Users/User_info', ['user'=>null]);	
+				else
+					$this->view('Users/User_info', ['user'=>$resultingUser]);	
+			}
+		}
 	}
 ?>

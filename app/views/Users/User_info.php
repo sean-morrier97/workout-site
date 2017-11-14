@@ -11,10 +11,10 @@ User Information:
 	<th>Posts:</th>
 </tr>
 <?php
-foreach($data['users'] as $users){
-	echo "<tr><td>" .$users->username. "</td>";
-	echo "<td>" .$users->email. "</td>";
-	echo "<td>" .$users->dob. "</td>";
+$user = $data['user'];
+	echo "<tr><td>" .$user->username. "</td>";
+	echo "<td>" . $user->email . "</td>";
+	echo "<td>" . $user->dob . "</td>";
     echo "</tr>";
 }
 ?>
