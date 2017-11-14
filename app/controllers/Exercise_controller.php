@@ -22,7 +22,8 @@ class Exercise_controller extends Controller{
 	public function search(){
 		if(isset($_POST['action'])){
 			$exercise = $this->model('exercise');
-			$exercise->where('title', 'like', '$_POST[\'searchParam\']');
+			$searchParam = $_POST['searchParam'];
+			$exercise->where('title', 'like', '%' . $searchParam . '%');
 			//$exercise->orderby('title');
 			$results = $exercise->get();
 			$this->view('Home/Main', ['searchResults'=>$results]);
@@ -31,25 +32,25 @@ class Exercise_controller extends Controller{
 	
 	public function addToFavorites(){
 		if(isset($_POST['action'])){
-			$exercise = $this->model('favorite_exercises');
-			$exercise->exercise_id = $_POST['exercise_id']; 
-			$exercise->user_id = $_SESSION['userID'];
-			if($exercise->doesExist() == null){
-				$exercise->insert();
+			$favorite_exercises = $this->model('favorite_exercises');
+			$favorite_exercises->exercise_id = $_POST['exercise_id']; 
+			$favorite_exercises->user_id = $_SESSION['userID'];
+			if($favorite_exercises->doesExist() == null){
+				$favorite_exercises->insert();
 				$this->view('Home/Main', ['searchResults'=>null]);
 			}else{
-				//display error message
+				$this->view('Home/Main', ['searchResults'=>null]);
 			}
 		}
 	}
 	
 	public function removeFromFavorites(){
 		if(isset($_POST['action'])){
-			$exercise = $this->model('favorite_exercises');
-			$exercise->exercise_id = $_POST['exercise_id']; 
-			$exercise->user_id = $_SESSION['userID'];
-			if($exercise->doesExist() == null){
-				$exercise->delete();
+			$favorite_exercises = $this->model('favorite_exercises');
+			$favorite_exercises->exercise_id = $_POST['exercise_id']; 
+			$favorite_exercises->user_id = $_SESSION['userID'];
+			if($favorite_exercises->doesExist() == null){
+				$favorite_exercises->deleteFavorite();
 			}else{
 				//display error message
 			}
@@ -58,8 +59,8 @@ class Exercise_controller extends Controller{
 	
 	public function viewFavorites(){
 		$fav_exercise = $this->model('favorite_exercises');
-		$fav_exercise->where('user_id', '=', '$_SESSION[\'userID\']');
-		$results = $fav_exercise->get();
+		$fav_exercise->user_id = $_SESSION['userID'];
+		$results = $fav_exercise->joinedGet();
 		$this->view('Exercises/fav_exercises', ['favorites'=>$results]);
 	}
 	

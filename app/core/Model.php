@@ -80,9 +80,9 @@ class Model{
     }
 
 	//run select statements
-    public function get(){
-		$select	= "SELECT * FROM $this->_className $this->_whereClause $this->_orderBy";
-
+    public function get($select = ''){
+		if($select == '')
+			$select = "SELECT * FROM $this->_className $this->_whereClause $this->_orderBy";
         $stmt = $this->_connection->prepare($select);
         $stmt->execute();
         $stmt->setFetchMode(PDO::FETCH_CLASS, $this->_className);
@@ -92,6 +92,7 @@ class Model{
         }
         return $returnVal;
     }
+	
 
     public function insert(){
 		$properties = $this->getProps();
@@ -123,8 +124,9 @@ class Model{
         $stmt->execute($this->toArray($properties));
 	}
 
-	public function delete(){
-		$delete = "DELETE FROM $this->_className WHERE $this->_PKName = :$this->_PKName";
+	public function delete($delete = ''){
+		if($delete == '')
+			$delete = "DELETE FROM $this->_className WHERE $this->_PKName = :$this->_PKName";
         $stmt = $this->_connection->prepare($delete);
         $stmt->execute(array($this->_PKName=>$this->{$this->_PKName}));
 	}
