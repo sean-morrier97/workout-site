@@ -11,10 +11,13 @@
 #logout{
 	margin-left: 1700px;
 }
+#search{
+	margin-left: 600px;
+}
 </style>
 </form>
 
-<form method="post" action="/Exercise_controller/search" class="form-horizontal">
+<form method="post" action="/Exercise_controller/search" class="form-horizontal" id="search">
 Search: <input type="text" name="searchParam">
 <select name="searchOptions">
 	<option value="1">Users</option>
@@ -23,13 +26,3 @@ Search: <input type="text" name="searchParam">
 </select>
 <input type="submit" class="btn btn-default" name="action" value="search" />
 </form>
-<?php
-if($data['searchResults']==null);
-else{
-	foreach($data['searchResults'] as $item){
-		echo $item->title . ' Average Rating: ' . $item->number_of_ratings . '<br> Posted By: ' . $item->poster_id . ' Posted on: ' . $item->posted_date . 
-				'<form method="post" action="/Exercise_controller/addToFavorites" class="form-horizontal"> <input value="'. $item->exercise_id .'" type="hidden" name="exercise_id">' . 
-				'<input type="submit" class="btn btn-default" name="action" value="Add To Favorites" /> </form><br><br> ';
-	}
-}
-?>
