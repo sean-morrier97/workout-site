@@ -14,6 +14,12 @@ else if($data['resultType'] == 2){
 				'<input type="submit" class="btn btn-default" name="action" value="Add To Favorites" /> </form><br><br> ';
 	}
 }else if($data['resultType'] == 1){
-	foreach($data[''])
+	foreach($data['searchResults'] as $item){
+		echo 'Username: ' . $item->username . '<br> Email: ' . $item->email . '<br> Date of Birth: ' . $item->dob;
+	}
+}else if($data['resultType'] == 3){
+	foreach($data['searchResults'] as $item){
+		echo $item->title . ' Average Rating: ' . $item->average. '<br> Posted by: ' . $item->poster_id . ' Posted on: ' . $item->posted_date;
+	}
 }
 ?>
