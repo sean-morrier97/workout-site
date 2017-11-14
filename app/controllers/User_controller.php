@@ -51,6 +51,8 @@ class User_controller extends Controller{
 	}
 	
 	public function listOfFollowers(){
+		$user = $this->model('following');
+		$user->where('followee_id', '=', '$_SESSION[\'userID\']')
 		
 	}
 ?>
