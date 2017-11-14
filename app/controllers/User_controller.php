@@ -42,6 +42,10 @@ class User_controller extends Controller{
 	
 	public function listOfFollowers(){
 		$user = $this->model('following');
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 88023fd0f79673ffc281e9b3afa212070be9ba40
 		$user->where('followee_id', '=', '$_SESSION[\'userID\']');
 		$results = $user->get();
 		$this->view('Users/followers', ['followers'=>$results]);
@@ -56,6 +60,7 @@ class User_controller extends Controller{
 	
 	public function viewProfile(){
 		$user = $this->model('Users');
+<<<<<<< HEAD
 		$result = $user->find($_POST['userID']);
 		$this->view('Users/User_info', ['user'=>$result]);
 		if($result->status == 1){
@@ -68,10 +73,32 @@ class User_controller extends Controller{
 			}else{
 				if($followingResult[1]->status == 1)
 					$this->view('Users/User_info', ['user'=>null]);	
+=======
+		$user->id = $_POST['userID'];
+		$result = $user->get();
+		$resultingUser = $result[0];
+		if($resultingUser->status == 1){
+			$following = $this->model('following');
+			$following->where('follower_id', '=', '$_SESSION[\'userID\']');
+			$following->where('followee_id', '=', '$_POST[\'userID\']');
+			$result = $following->get();
+			if(count($result)){
+				$this->view('Users/User_info', ['user'=>null]);				
+			}else{
+				if($result[0]->status == 1)
+					this->view('Users/User_info', ['user'=>null]);	
+>>>>>>> 88023fd0f79673ffc281e9b3afa212070be9ba40
 				else
 					$this->view('Users/User_info', ['user'=>$resultingUser]);	
 			}
 		}
+<<<<<<< HEAD
+=======
+=======
+		$user->where('followee_id', '=', '$_SESSION[\'userID\']')
+		
+>>>>>>> 8b8afec05512a0158628e9da1a3d6000ee1a1feb
+>>>>>>> 88023fd0f79673ffc281e9b3afa212070be9ba40
 	}
 }
 ?>
