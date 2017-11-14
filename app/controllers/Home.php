@@ -30,7 +30,7 @@ class Home extends Controller{
 				$search->where('title', 'like', '%' . $searchParam . '%');					
 			}
 			$results = $search->get();
-			$this->view('Home/Main', ['searchResults'=>$results, 'resultType'=>$resultType]);
+			$this->view('Home/search', ['searchResults'=>$results, 'resultType'=>$resultType]);
 		}
 	}
 }
