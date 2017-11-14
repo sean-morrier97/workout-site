@@ -3,18 +3,14 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
-User Information:
-<tr>
-	<th>Username:</th>
-	<th>Email:</th>
-	<th>Date of Birth:</th>
-	<th>Posts:</th>
-</tr>
+<h1>User Information:</h1>
 <?php
-foreach($data['users'] as $users){
-	echo "<tr><td>" .$users->username. "</td>";
-	echo "<td>" .$users->email. "</td>";
-	echo "<td>" .$users->dob. "</td>";
-    echo "</tr>";
-}
+$user = $data['user'];
+if($user != null){
+	echo "Username: " .$user->username. "<br>";
+	echo "Email: " . $user->email . "<br>";
+	echo "Date of Birth: " . $user->dob . "<br>";
+}else
+	echo 'Sorry, this profile is private'
+
 ?>

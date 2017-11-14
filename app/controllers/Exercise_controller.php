@@ -19,16 +19,7 @@ class Exercise_controller extends Controller{
 			echo $exercise->posted_date;
 		}
     }
-	public function search(){
-		if(isset($_POST['action'])){
-			$exercise = $this->model('exercise');
-			$searchParam = $_POST['searchParam'];
-			$exercise->where('title', 'like', '%' . $searchParam . '%');
-			//$exercise->orderby('title');
-			$results = $exercise->get();
-			$this->view('Home/Main', ['searchResults'=>$results]);
-		}
-	}
+	
 	
 	public function addToFavorites(){
 		if(isset($_POST['action'])){

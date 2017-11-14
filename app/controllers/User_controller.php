@@ -2,15 +2,6 @@
 
 class User_controller extends Controller{
 	private $deletedAccountStatus = 0;
-	public function search(){
-		$user = $this->model('Users');
-		$user->where('username', 'like', '$_POST[\'searchParam\']');
-		$user->orderby('username');
-		$results[] = $exercise->get();
-		for( $i = 0; $i<results.count(), $i++){
-			
-		}
-	}
 	
 	public function setAccountPrivacy(){
 		$user = $this->model('Users');
@@ -44,13 +35,43 @@ class User_controller extends Controller{
 		$user->where('follower_id', '=', '$_SESSION[\'userID\']');
 		$user->where('followee_id', '=', '$_POST[\'followee_id\']');
 		$results = $user->get();
-		try{
-			$user->id = $results->id;
-			$user->delete();
-		}
+		$user->id = $results->id;
+		$user->delete();
+		
 	}
 	
 	public function listOfFollowers(){
-		
+		$user = $this->model('following');
+		$user->where('followee_id', '=', '$_SESSION[\'userID\']');
+		$results = $user->get();
+		$this->view('Users/followers', ['followers'=>$results]);
 	}
+	
+	public function listOfFollowees(){
+		$user = $this->model('following');
+		$user->where('follower_id', '=', '$_SESSION[\'userID\']');
+		$results = $user->get();
+		$this->view('Users/followings', ['followees'=>$results]);
+	}
+	
+	public function viewProfile(){
+		$user = $this->model('Users');
+		$result = $user->find($_POST['userID']);
+		$this->view('Users/User_info', ['user'=>$result]);
+		if($result->status == 1){
+			$following = $this->model('following');
+			$following->where('follower_id', '=', '$_SESSION[\'userID\']');
+			$following->where('followee_id', '=', '$_POST[\'userID\']');
+			$followingResult = $following->get();
+			if(count($followingResult) == 0){
+				$this->view('Users/User_info', ['user'=>null]);				
+			}else{
+				if($followingResult[1]->status == 1)
+					$this->view('Users/User_info', ['user'=>null]);	
+				else
+					$this->view('Users/User_info', ['user'=>$resultingUser]);	
+			}
+		}
+	}
+}
 ?>
