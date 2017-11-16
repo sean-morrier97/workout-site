@@ -18,9 +18,8 @@ form{
 	display: inline-block;
 =======
 <<<<<<< HEAD
-form{
-	display: inline-block;
 =======
+}
 #search{
 	margin-left: 600px;
 >>>>>>> 8b8afec05512a0158628e9da1a3d6000ee1a1feb
@@ -38,6 +37,7 @@ form{
 <form method="post" action="/Exercise_controller/search" class="form-horizontal" id="search">
 >>>>>>> 8b8afec05512a0158628e9da1a3d6000ee1a1feb
 >>>>>>> 88023fd0f79673ffc281e9b3afa212070be9ba40
+<form method="post" action="/Home/search" class="form-horizontal" id="search">
 Search: <input type="text" name="searchParam">
 <select name="searchOptions">
 	<option value="1">Users</option>

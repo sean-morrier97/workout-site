@@ -73,5 +73,8 @@ class User_controller extends Controller{
 			}
 		}
 	}
+	public function posts(){
+		
+	}
 }
 ?>

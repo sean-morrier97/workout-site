@@ -40,6 +40,8 @@ else if($data['resultType'] == 2){
 		'<form method="post" action="/User_controller/viewProfile" class="form-horizontal"> <input value="'. $item->id .'" type="hidden" name="exercise_id">' . 
 >>>>>>> 88023fd0f79673ffc281e9b3afa212070be9ba40
 				'<input type="submit" class="btn btn-default" name="action" value="View Profile" /> </form><br><br>';
+		'<form method="post" action="/User_controller/viewProfile" class="form-horizontal"> <input value="'. $item->id .'" type="hidden" name="userID">'.
+		'<input type="submit" class="btn btn-default" name="action" value="View Profile" /> </form><br><br> ';
 	}
 }else if($data['resultType'] == 3){
 	echo '<h1>Workout: </h1>';
@@ -58,4 +60,5 @@ else if($data['resultType'] == 2){
 >>>>>>> 88023fd0f79673ffc281e9b3afa212070be9ba40
 	}
 }
+
 ?>

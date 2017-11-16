@@ -12,11 +12,35 @@ $results = $exercise->get();
 foreach($results as $group ){
 	echo '<option value="'.$group->muscle_group_id. '"/>'.$group->muscle_group_name.'</option>';
 }
+?>		  
+</select>
+<br>
+Number of exercises: <input type="number" name="numberOfExercises" min="1" max="5">
+<?php
+$exercises = 0;
+switch($numberOfExercises){
+	case 1:
+		$exercises = 1;
+		break;
+	case 2:
+		$exercises = 2;
+		break;
+	case 3:
+		$exercises = 3;
+		break;
+	case 4:
+		$exercises = 4;
+		break;
+	case 5:
+		$exercises = 5;
+		break;
+}
+for($i=0; $i<$exercises; $i++){
+	echo 'Number of sets: <input type="number" name="sets">'
+	echo 'Number of repetitions: <input type="number" name="reps">'
+	echo 'Muscle group: <input type="text" name="muscle_group_id">'
+	echo 'Position: <input type="text" name="position">'
+}
 ?>
-</select><br>
-Number of sets: <input type="number" name="sets"><br>
-Number of repetitions <input type="number" name="reps"><br>
-Muscle group: <input type="text" name="muscle_group_id"><br>
-Position: <input type="text" name="position"><br>
 <input type="submit" class="btn btn-default" name="action" value="Create" />
 </form>
