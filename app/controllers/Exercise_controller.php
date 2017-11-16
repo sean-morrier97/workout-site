@@ -26,7 +26,7 @@ class Exercise_controller extends Controller{
 			$favorite_exercises = $this->model('favorite_exercises');
 			$favorite_exercises->exercise_id = $_POST['exercise_id']; 
 			$favorite_exercises->user_id = $_SESSION['userID'];
-			if($favorite_exercises->doesExist() == null){
+			if($favorite_exercises->doesExist() == 0){
 				$favorite_exercises->insert();
 				$this->view('Home/Main', ['searchResults'=>null]);
 			}else{
@@ -58,13 +58,14 @@ class Exercise_controller extends Controller{
 	public function rateExercise(){
 		if(isset($_POST['action'])){
 			$exercise = $this->model('exercise_rating');
-			$exercise->exercise_id = $_POST['exercise_id']; 
+			$exercise->post_id = $_POST['exercise_id']; 
 			$exercise->user_id = $_SESSION['userID'];
 			$exercise->rating = $_POST['rating'];
-			if($exercise->doesExist() == null){
+			echo $exercise->doesExist();
+			if(count($exercise->doesExist())==0){
 				$exercise->insert();
-			}else{
-				$exercise->update();
+			}else{			
+				$exercise->update($rating);
 			}
 		}
 	}

@@ -106,21 +106,21 @@ class Model{
 		return $this->_connection->lastInsertId();
 	}
 
-	public function update(){
+	public function update($update = ''){
 		$properties = $this->getProps();
 		$num = count($properties);
-		$update = '';
 		if ($num  > 0){
 			//update
 			$setClause = [];
 			
 			foreach($properties as $item)
 				$setClause[] = sprintf('%s = :%s', $item, $item);
-			$setClause = implode(', ', $setClause);
+			$setClause = implode(', ', $setClause);			
 			$update = 'UPDATE ' . $this->_className . ' SET ' . $setClause . " WHERE $this->_PKName = :$this->_PKName";
 		}
 
         $stmt = $this->_connection->prepare($update);
+		$properties[] = $this->_PKName;
         $stmt->execute($this->toArray($properties));
 	}
 

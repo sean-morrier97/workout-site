@@ -2,7 +2,9 @@
 
 class User_controller extends Controller{
 	private $deletedAccountStatus = 0;
-	
+	public function settings(){
+		$this->view('Users/settings');
+	}
 	public function setAccountPrivacy(){
 		$user = $this->model('Users');
 		$user->privacy_setting = $_POST['pSettings'];
@@ -15,6 +17,7 @@ class User_controller extends Controller{
 		$user->id = $_SESSION['userID'];
 		$user->status = deletedAccountStatus;
 		$user->update();
+		LoginCore::logout();
 	}
 	
 	public function followUser(){
@@ -69,9 +72,10 @@ class User_controller extends Controller{
 				if($followingResult[1]->status == 1)
 					$this->view('Users/User_info', ['user'=>null]);	
 				else
-					$this->view('Users/User_info', ['user'=>$resultingUser]);	
+					$this->view('Users/User_info', ['user'=>$result]);	
 			}
-		}
+		}else
+			$this->view('Users/User_info', ['user'=>$result]);
 	}
 }
 ?>

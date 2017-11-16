@@ -16,8 +16,13 @@ class exercise_rating extends Model{
 	}
 	
 	public function doesExist(){
-		parent::where('workout_id', '=', $exercise_id);
-		parent::where('user_id', '=', $user_id);
-		return parent::get();
+		parent::where('post_id', '=', $this->post_id);
+		parent::where('user_id', '=', $this->user_id);
+		return count(parent::get())!=0;
+	}
+	
+	public function update($rating){
+		$update = 'UPDATE exercise_rating SET ' . $setClause . " WHERE $this->_PKName = :$this->_PKName";
+		parent::get($update);
 	}
 }

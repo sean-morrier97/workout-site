@@ -13,31 +13,20 @@
 #logout{
 	margin-left: 1700px;
 }
-<<<<<<< HEAD
 form{
 	display: inline-block;
-=======
-<<<<<<< HEAD
-form{
-	display: inline-block;
-=======
+}
 #search{
 	margin-left: 600px;
->>>>>>> 8b8afec05512a0158628e9da1a3d6000ee1a1feb
->>>>>>> 88023fd0f79673ffc281e9b3afa212070be9ba40
 }
 </style>
 </form>
 
-<<<<<<< HEAD
+<form method="GET" action="/User_controller/settings" class="form-horizontal">
+<input type="submit" class="btn btn-default" name="action" value="Settings" />
+</form>
+
 <form method="post" action="/Home/search" class="form-horizontal">
-=======
-<<<<<<< HEAD
-<form method="post" action="/Home/search" class="form-horizontal">
-=======
-<form method="post" action="/Exercise_controller/search" class="form-horizontal" id="search">
->>>>>>> 8b8afec05512a0158628e9da1a3d6000ee1a1feb
->>>>>>> 88023fd0f79673ffc281e9b3afa212070be9ba40
 Search: <input type="text" name="searchParam">
 <select name="searchOptions">
 	<option value="1">Users</option>
