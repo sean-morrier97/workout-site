@@ -1,7 +1,7 @@
 <?php
 
 class Workout_controller extends Controller{
-	$workoutDetail;
+	private $workoutDetail;
 	public function createworkout()
 	{
 		if(isset($_POST['action'])){
