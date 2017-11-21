@@ -7,6 +7,7 @@ class Login extends Controller{
 			$password_hash = $_POST['password'];
 			LoginCore::login($username, $password_hash);
 			$this->view('home/Main', ['searchResults'=>null]);
+			$this->view('home/Main', ['posts'=>null]);
 			header('location:/home/Main');
 		}else{
 			$this->view('Login/index');			
