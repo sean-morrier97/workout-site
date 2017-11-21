@@ -13,4 +13,9 @@ if($user != null){
 }else{
 	echo 'Sorry, this profile is private';
 }
+echo "<form method=\"post\" action=\"/User_controller/followUser\" class=\"form-horizontal\">";
+echo "<input type=\"submit\" class=\"btn btn-default\" name=\"action\" value=\"Follow\" />";
+echo "<input type=\"hidden\" class=\"btn btn-default\" name=\"user_id\" value=\"" . $user->id ."\" />";
+echo "<input type=\"hidden\" class=\"btn btn-default\" name=\"status\" value=\"" . $user->privacy_setting ."\" />";
+echo "</form>";
 ?>

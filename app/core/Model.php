@@ -107,18 +107,19 @@ class Model{
 	}
 
 	public function update($update = ''){
-		$properties = $this->getProps();
-		$num = count($properties);
-		if ($num  > 0){
-			//update
-			$setClause = [];
-			
-			foreach($properties as $item)
-				$setClause[] = sprintf('%s = :%s', $item, $item);
-			$setClause = implode(', ', $setClause);			
-			$update = 'UPDATE ' . $this->_className . ' SET ' . $setClause . " WHERE $this->_PKName = :$this->_PKName";
+		if($update == ''){
+			$properties = $this->getProps();
+			$num = count($properties);
+			if ($num  > 0){
+				//update
+				$setClause = [];
+				
+				foreach($properties as $item)
+					$setClause[] = sprintf('%s = :%s', $item, $item);
+				$setClause = implode(', ', $setClause);			
+				$update = 'UPDATE ' . $this->_className . ' SET ' . $setClause . " WHERE $this->_PKName = :$this->_PKName";
+			}
 		}
-
         $stmt = $this->_connection->prepare($update);
 		$properties[] = $this->_PKName;
         $stmt->execute($this->toArray($properties));

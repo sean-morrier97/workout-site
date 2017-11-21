@@ -5,7 +5,8 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
 <form method="post" action="/Workout_controller/createWorkout" class="form-horizontal">
 Title: <input type="text" name="title"><br>
-Muscle group: <select name="muscleGroup">		  
+Number of Exercises: <input type="number" name="noOfExercises" min="1" max="10"><br>
+/*Muscle group: <select name="muscleGroup">		  
 <?php
 $exercise = $this->model('muscle_group');
 $results = $exercise->get();
@@ -13,10 +14,6 @@ foreach($results as $group ){
 	echo '<option value="'.$group->muscle_group_id. '"/>'.$group->muscle_group_name.'</option>';
 }
 ?>
-</select><br>
-Number of sets: <input type="number" name="sets"><br>
-Number of repetitions <input type="number" name="reps"><br>
-Muscle group: <input type="text" name="muscle_group_id"><br>
-Position: <input type="text" name="position"><br>
+</select><br>*/
 <input type="submit" class="btn btn-default" name="action" value="Create" />
 </form>

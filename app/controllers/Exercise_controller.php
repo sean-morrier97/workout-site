@@ -26,7 +26,7 @@ class Exercise_controller extends Controller{
 			$favorite_exercises = $this->model('favorite_exercises');
 			$favorite_exercises->exercise_id = $_POST['exercise_id']; 
 			$favorite_exercises->user_id = $_SESSION['userID'];
-			if($favorite_exercises->doesExist() == 0){
+			if(count($favorite_exercises->get())==0){
 				$favorite_exercises->insert();
 				$this->view('Home/Main', ['searchResults'=>null]);
 			}else{
@@ -40,7 +40,7 @@ class Exercise_controller extends Controller{
 			$favorite_exercises = $this->model('favorite_exercises');
 			$favorite_exercises->exercise_id = $_POST['exercise_id']; 
 			$favorite_exercises->user_id = $_SESSION['userID'];
-			if($favorite_exercises->doesExist() == null){
+			if(count($favorite_exercises->get())!=0){
 				$favorite_exercises->deleteFavorite();
 			}else{
 				//display error message
@@ -57,15 +57,16 @@ class Exercise_controller extends Controller{
 	
 	public function rateExercise(){
 		if(isset($_POST['action'])){
-			$exercise = $this->model('exercise_rating');
-			$exercise->post_id = $_POST['exercise_id']; 
-			$exercise->user_id = $_SESSION['userID'];
-			$exercise->rating = $_POST['rating'];
-			echo $exercise->doesExist();
-			if(count($exercise->doesExist())==0){
-				$exercise->insert();
+			$rating = $this->model('exercise_rating');
+			$rating->where('post_id', '=', $_POST['exercise_id']); 
+			$rating->where('user_id', '=', $_SESSION['userID']); 
+			$rating->post_id = $_POST['exercise_id'];
+			$rating->user_id = $_SESSION['userID'];
+			$rating->rating = $_POST['rating'];
+			if(count($rating->get())==0){
+				$rating->insert();
 			}else{			
-				$exercise->update($rating);
+				$rating->update();
 			}
 		}
 	}

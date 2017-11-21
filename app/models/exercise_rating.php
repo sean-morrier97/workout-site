@@ -9,20 +9,8 @@ class exercise_rating extends Model{
 		parent::__construct();
 	}
 	
-	public function exercise_rating($post_id, $user_id, $rating){
-		$this->$post_id = $post_id;
-		$this->$user_id = $user_id;
-		$this->$rating = $rating;		
-	}
-	
-	public function doesExist(){
-		parent::where('post_id', '=', $this->post_id);
-		parent::where('user_id', '=', $this->user_id);
-		return count(parent::get())!=0;
-	}
-	
-	public function update($rating){
-		$update = 'UPDATE exercise_rating SET ' . $setClause . " WHERE $this->_PKName = :$this->_PKName";
-		parent::get($update);
+	public function update(){
+		$update = "UPDATE exercise_rating SET rating = $this->rating WHERE post_id = $this->post_id and user_id = $this->user_id";
+		parent::update($update);
 	}
 }

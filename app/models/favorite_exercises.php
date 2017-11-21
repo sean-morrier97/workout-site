@@ -8,12 +8,6 @@ class favorite_exercises extends Model{
 		parent::__construct();
 	}
 	
-	public function doesExist(){
-		parent::where('exercise_id', '=', $exercise_id);
-		parent::where('user_id', '=', $user_id);
-		return parent::get();
-	}
-	
 	public function joinedGet(){
 		$select	= "SELECT * FROM exercise e , favorite_exercises fe 
 					where user_id = $this->user_id AND e.exercise_id = fe.exercise_id";

@@ -23,8 +23,8 @@ class User_controller extends Controller{
 	public function followUser(){
 		$user = $this->model('following');
 		$user->id = 0;
-		$user->follower_id = $_SESSION['userID'];
-		$user->followee_id = $_POST['user_id'];
+		$user->followee_id = $_SESSION['userID'];
+		$user->follower_id = $_POST['user_id'];
 		if($_POST['status'] == 1)
 			$user->status = 1;
 		else{
@@ -34,27 +34,35 @@ class User_controller extends Controller{
 	}
 	
 	public function unfollowUser(){
-		$user = $this->model('following');
-		$user->where('follower_id', '=', '$_SESSION[\'userID\']');
-		$user->where('followee_id', '=', '$_POST[\'followee_id\']');
-		$results = $user->get();
-		$user->id = $results->id;
-		$user->delete();
-		
+		$following = $this->model('following');
+		$following->ID = $_POST['id'];
+		$following->delete();	
+	}
+	
+	public function getUsernameFromID($id){
+		$user = $this->model('Users');		
+		$user->where('id', '=', $id);
+		return $user->get();
+	}
+	
+	public function followInfo(){
+		$followees = $this->listOfFollowees();
+		$followers = $this->listOfFollowers();
+		$this->view('Users/followers', ['followers'=>$followers, 'followees'=>$followees]);		
 	}
 	
 	public function listOfFollowers(){
-		$user = $this->model('following');
-		$user->where('followee_id', '=', '$_SESSION[\'userID\']');
-		$results = $user->get();
-		$this->view('Users/followers', ['followers'=>$results]);
+		$following = $this->model('following');
+		$following->where('followee_id', '=', $_SESSION['userID']);
+		$results = $following->get();
+		return $results;
 	}
 	
 	public function listOfFollowees(){
-		$user = $this->model('following');
-		$user->where('follower_id', '=', '$_SESSION[\'userID\']');
-		$results = $user->get();
-		$this->view('Users/followings', ['followees'=>$results]);
+		$following = $this->model('following');
+		$following->where('follower_id', '=', $_SESSION['userID']);
+		$results = $following->get();
+		return $results;
 	}
 	
 	public function viewProfile(){
@@ -76,6 +84,13 @@ class User_controller extends Controller{
 			}
 		}else
 			$this->view('Users/User_info', ['user'=>$result]);
+	}
+	
+	public function createPR(){
+		$exercise = $this->model('exercise');
+		$exercise->exercise_id = $_POST['exercise_id'];
+		$result = $exercise->get();
+		$this->view('Users/personal_record', ['exercise'=>$result[0]]);
 	}
 }
 ?>

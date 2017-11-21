@@ -6,7 +6,4 @@ class following extends Model{
 	public $followee_id;
 	public $status;
 	
-	public function __construct(){
-		parent::__construct();
-	}
 }

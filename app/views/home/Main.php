@@ -25,8 +25,11 @@ form{
 <form method="GET" action="/User_controller/settings" class="form-horizontal">
 <input type="submit" class="btn btn-default" name="action" value="Settings" />
 </form><br>
-<form method="post" action="/Workout_controller/createworkout" class="form-horizontal">
-<input type="submit" class="btn btn-default" name="action" value="Create Workout" />
+<form method="get" action="/Workout_controller/createWorkout" class="form-horizontal">
+<input type="submit" class="btn btn-default" name="" value="Create Workout" />
+</form>
+<form method="GET" action="/User_controller/followInfo" class="form-horizontal">
+<input type="submit" class="btn btn-default" name="action" value="Followers" />
 </form>
 
 <form method="post" action="/Home/search" class="form-horizontal" id="search">
@@ -41,7 +44,7 @@ Search: <input type="text" name="searchParam">
 <form method="get" action="/Home/" class="form-horizontal">
 Posts:
 <?php
-if($data['posts']) == null;
+if($data['posts'] == null);
 else{
 	foreach($data['posts'] as $item){
 		echo 'Post: ' . $item->post_id;

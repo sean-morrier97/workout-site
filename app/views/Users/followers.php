@@ -3,14 +3,24 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
-Followers:
-<tr>
-    <th>Username:</th>
-    <th>Status:</th>
-</tr>
+<h2>Followees:</h2>
+
 <?php
-foreach($data['following'] as $follower){
-    echo "<form method=\"post\" action=\"/UserController/listOfFollowers\" class=\"form-horizontal\"><tr><td name = \"follower_id\">" .$follower->follower_id. "</td>";
-    echo "<td>" .$follower->status. "</td></tr></form>";
+foreach($data['followers'] as $follower){
+	$user = User_controller::getUsernameFromID($follower->follower_id);
+    echo $user[0]->username . ' ' . $follower->status.
+	'<form method="post" action="/User_controller/unfollowUser" class="form-horizontal">
+	<input type="submit" class="btn btn-default" name="action" value="Unfollow" />
+	<input type="hidden" class="btn btn-default" name="id" value="' . $follower->id . '" />
+	</form></br>';
+}
+echo '<br>';
+?>
+<h2>Followers:</h2>
+
+<?php
+foreach($data['followees'] as $followee){
+	$user = User_controller::getUsernameFromID($followee->followee_id);
+    echo $user[0]->username . ' ' . $followee->status;
 }
 ?>
