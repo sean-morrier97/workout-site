@@ -77,5 +77,19 @@ class User_controller extends Controller{
 		}else
 			$this->view('Users/User_info', ['user'=>$result]);
 	}
+	
+	public function getPR(){
+		$exercise = $this->model('personal_record');
+		$exercise->where('user_id', '=', $_SESSION['userID']);
+		$results = $exercise->get();
+		$this->view('Users/personal_record', ['exercise'=>$results]);
+	}
+	public function createPR(){
+		$exercise = $this->model('exercise');
+		$exercise->exercise_id = $_POST['exercise_id'];
+		$result = $exercise->get();
+		$this->view('Users/createRecord', ['exercise'=>$result[0]]);
+	}
+
 }
 ?>

@@ -36,12 +36,15 @@ Search: <input type="text" name="searchParam">
 	<option value="2">Exercises</option>
 	<option value="3">Workout</option>
 </select>
-<input type="submit" class="btn btn-default" name="action" value="search" />
-</form>
-<form method="get" action="/Home/" class="form-horizontal">
+<input type="submit" class="btn btn-default" name="action" value="Search" />
+</form><br>
+<form method="get" action="/User_controller/getPR" class="form-horizontal">
+<input type="submit" class="btn btn-default" name="action" value="Personal Record">
+</form><br>
+<form method="get" action="/Post_controller/posts" class="form-horizontal">
 Posts:
 <?php
-if($data['posts']) == null;
+if($data['posts']== null);
 else{
 	foreach($data['posts'] as $item){
 		echo 'Post: ' . $item->post_id;
