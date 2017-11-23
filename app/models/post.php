@@ -11,11 +11,12 @@ class post extends Model{
 		parent::__construct();
 	}
 	
-	public function post($post_id, $likes, $posted_date, $poster, $URL){
-		$this->$post_id = $post_id;
-		$this->$likes = $likes;
-		$this->$posted_date = $posted_date;
-		$this->$poster = $poster;
-		$this->$URL = $URL;
+	public function get(){
+		parent::get("select * from post where poster in (select 
+			followee_id from following where follower_id = " . $_SESSION['userID'] . ")");
+	}
+	
+	public function getMyPosts(){
+		parent::get("select * from post where poster = " . $_SESSION['userID']);
 	}
 }

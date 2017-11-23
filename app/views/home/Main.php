@@ -47,14 +47,26 @@ Search: <input type="text" name="searchParam">
 <form method="get" action="/User_controller/getPR" class="form-horizontal">
 <input type="submit" class="btn btn-default" name="action" value="Personal Record">
 </form><br>
-<form method="get" action="/Post_controller/posts" class="form-horizontal">
+
 Posts:
 <?php
-if($data['posts'] == null);
-else{
-	foreach($data['posts'] as $item){
-		echo 'Post: ' . $item->post_id;
+$posts = Post_controller::getPosts();
+foreach($posts as $item){
+	$user = User_controller::getUsernameFromID($item->poster);
+	echo "<form method=\"post\" action=\"/Post_controller/likePost\" class=\"form-horizontal\">";
+	echo $user[0]->username . "<br>" . $item->posted_date . "<br><a href=" . $item->URL . ">Check this out!</a><input type=\"hidden\" 
+		name=\"post_id\" value=\"". $item->post_id . "\"><input type=\"submit\" class=\"btn btn-default\" 
+		name=\"action\" value=\"Like\"></form>";
+		
+	echo "<form method=\"get\" action=\"/Post_controller/commentOnPost\" class=\"form-horizontal\">
+		<input type=\"hidden\" name=\"post_id\" value=\"". $item->post_id . "\"><input type=\"submit\" class=\"btn btn-default\" 
+		name=\"action\" value=\"comment\"></form>";
+	$comments = Post_controller::getComments();
+	foreach($comments as $comment){
+		echo User_controller::getUsernameFromID($comment->poster)  . "<br>" . $comment->posted_date .  
+		"<br><h5>" . $comment->content . "<h5><form method=\"get\" action=\"/Post_controller/likeComment\" 
+		class=\"form-horizontal\"><input type=\"hidden\" name=\"post_id\" value=\"". $comment->id . "\">
+		<input type=\"submit\" class=\"btn btn-default\" name=\"action\" value=\"Like\"></form>";
 	}
 }
 ?>
-</form>

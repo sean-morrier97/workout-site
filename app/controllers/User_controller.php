@@ -89,7 +89,7 @@ class User_controller extends Controller{
 	public function getPR(){
 		$exercise = $this->model('personal_record');
 		$exercise->where('user_id', '=', $_SESSION['userID']);
-		$results = $exercise->getExerciseTitle();
+		$results = $exercise->get();
 		$this->view('Users/personal_record', ['exercise'=>$results]);
 	}
 	public function createPR(){
