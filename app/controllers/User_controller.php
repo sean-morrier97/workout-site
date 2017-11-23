@@ -86,11 +86,29 @@ class User_controller extends Controller{
 			$this->view('Users/User_info', ['user'=>$result]);
 	}
 	
+	public function getPR(){
+		$exercise = $this->model('personal_record');
+		$exercise->where('user_id', '=', $_SESSION['userID']);
+		$results = $exercise->get();
+		$this->view('Users/personal_record', ['exercise'=>$results]);
+	}
 	public function createPR(){
 		$exercise = $this->model('exercise');
 		$exercise->exercise_id = $_POST['exercise_id'];
 		$result = $exercise->get();
 		$this->view('Users/personal_record', ['exercise'=>$result[0]]);
+		try{
+			if(isset($_POST['action'])){
+				$exercise->exercise_id = $_POST['exercise_id'];
+				$user->id = $_SESSION['userID'];
+				$result = $exercise->get();
+				header('location:/Users/personal_record');				
+			}else{
+				$this->view('Users/createPR');
+			}
+		}catch (Exception $e){
+			$this->view('Users/createPR');
+		}
 	}
 }
 ?>
