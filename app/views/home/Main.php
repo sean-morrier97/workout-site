@@ -50,11 +50,7 @@ Search: <input type="text" name="searchParam">
 <form method="get" action="/Post_controller/posts" class="form-horizontal">
 Posts:
 <?php
-<<<<<<< HEAD
 if($data['posts'] == null);
-=======
-if($data['posts']== null);
->>>>>>> 67ddfaa1c8abf94c682b8355ebed9c1940b77e04
 else{
 	foreach($data['posts'] as $item){
 		echo 'Post: ' . $item->post_id;

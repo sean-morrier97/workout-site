@@ -5,7 +5,7 @@ class Post_controller extends Controller{
 		$post = $this->model('post');
 		$post -> where('post_id', '=', $_POST['userID']);
 		$results = $post->get();
-		$this->view('Home/Main', ['posts'=>$results]);
+		$this->view('Home/Main');
 	}
 }
 ?>
