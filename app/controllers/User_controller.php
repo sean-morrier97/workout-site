@@ -90,25 +90,42 @@ class User_controller extends Controller{
 		$exercise = $this->model('personal_record');
 		$exercise->where('user_id', '=', $_SESSION['userID']);
 		$results = $exercise->get();
-		$this->view('Users/personal_record', ['exercise'=>$results]);
+		$this->view('Users/personal_record', ['records'=>$results]);
 	}
 	public function createPR(){
-		$exercise = $this->model('exercise');
-		$exercise->exercise_id = $_POST['exercise_id'];
-		$result = $exercise->get();
-		$this->view('Users/personal_record', ['exercise'=>$result[0]]);
-		try{
-			if(isset($_POST['action'])){
-				$exercise->exercise_id = $_POST['exercise_id'];
-				$user->id = $_SESSION['userID'];
-				$result = $exercise->get();
-				header('location:/Users/personal_record');				
+		
+		if(isset($_POST['action'])){
+			$record = $this->model('personal_record');
+			$record->where('user_id', '=', $_SESSION['userID']);
+			$record->where('exercise_id', '=', $_POST['exercise_id']);
+			$results = $record->get();
+			if(count($results)==0){
+				$record->exercise_id = $_POST['exercise_id'];
+				$record->record_id = 0;
+				$record->record = $_POST['record'];
+				$record->user_id = $_SESSION['userID'];
+				$record->insert();
 			}else{
-				$this->view('Users/createPR');
+				$this->view('Users/updateRecord', ['exercise_id'=>$_POST['exercise_id']]);
 			}
-		}catch (Exception $e){
-			$this->view('Users/createPR');
 		}
+		else{
+			$this->view('Users/createRecord', ['exercise_id'=>$_POST['exercise_id']]);
+		}
+		
+	}
+	
+	public function updatePR(){
+		if(isset($_POST['action'])){
+			$record = $this->model('personal_record');
+			$record->record_id = $_POST['record_id'];
+			$record->record = $_POST['record'];
+			$record->update();
+		}
+		else{
+			$this->view('Users/UpdateRecord', ['record_id'=>$_POST['record_id']]);
+		}
+		
 	}
 }
 ?>

@@ -3,20 +3,18 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
-<h1>Personal Information</h1><br>
-<form method="get" action="/User_controller/createPR" class="form-horizontal">
-<form method="POST" action="/User_controller/createPR" class="form-horizontal">
-<input type="submit" class="btn btn-default" name="action" value="Create Record">
-</form>
-<form method="get" action="" class="form-horizontal">
-<input type="submit" class="btn btn-default" name="action" value="Update Record">
-</form><br>
+<h1>Personal Records</h1><br>
+
 <?php
-if($data['exercise'] == null);
+if($data['records'] == null)
+	echo "You dont have any personal records yet";
 else{
-	foreach($data['exercise'] as $item){
+	foreach($data['records'] as $item){
 		echo "Exercise: " . $item->record_id . "<br>";
-		echo "Record: " . $item->record . "<br>";
+		echo "Record: " . $item->record . "<br><form method=\"get\" action=\"\" class=\"form-horizontal\">
+			<input type=\"submit\" class=\"btn btn-default\" name=\"action\" value=\"Update Record\">
+			<input type=\"hidden\" name=\"record_id\" value=\"". $item->record_id . "\">
+			</form><br>";
 	}
 }
 ?>

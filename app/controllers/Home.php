@@ -9,7 +9,7 @@ class Home extends Controller{
         $this->view('home/index');
     }
 	public function Main(){
-		$this->view('Home/Main');
+		$this->view('home/Main');
 	}    
 	
 	public function search(){
