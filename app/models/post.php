@@ -12,8 +12,9 @@ class post extends Model{
 	}
 	
 	public function get(){
-		parent::get("select * from post where poster in (select 
-			followee_id from following where follower_id = " . $_SESSION['userID'] . ")");
+		$toQuery = "select * from post where poster in (select 
+			follower_id from following where followee_id = " . $_SESSION['userID'] . ")";
+		return parent::get($toQuery);
 	}
 	
 	public function getMyPosts(){

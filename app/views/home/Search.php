@@ -12,11 +12,14 @@ if($data['searchResults']==null);
 else if($data['resultType'] == 2){
 	echo '<h1>Exercises: </h1>';
 	foreach($data['searchResults'] as $item){
-		echo $item->title . ' Average Rating: ' . $item->number_of_ratings . '<br> Posted By: ' . User_controller::getUsernameFromID($item->poster_id) . ' Posted on: ' . $item->posted_date . 
+		$results = Helpers::getUsernameFromID($item->poster_id);
+		echo $item->title . ' Average Rating: ' . $item->number_of_ratings . '<br> Posted By: ' . $results[0]->username . ' Posted on: ' . $item->posted_date . 
 				'<form method="post" action="/Exercise_controller/addToFavorites" class="form-horizontal"> <input value="'. $item->exercise_id .'" type="hidden" name="exercise_id">' . 
 				'<input type="submit" class="btn btn-default" name="action" value="Add To Favorites" /> </form>'.
 				'<form method="get" action="/User_controller/createPR" class="form-horizontal"> <input value="'. $item->exercise_id .'" type="hidden" name="exercise_id">' . 
-				'<input type="submit" class="btn btn-default" name="action" value="Create Personal Record" /> </form>'.
+				'<input type="submit" class="btn btn-default" name="action" value="Create Personal Record" /> </form>
+				<form method="post" action="/Post_controller/share" class="form-horizontal">
+				<input type="submit" class="btn btn-default" name="action" value="Share" /> </form>'.
 				'<form method="post" action="/Exercise_controller/rateExercise" class="form-horizontal"> <input value="'. 
 					$item->exercise_id .'" type="hidden" name="exercise_id"><input value="1" type="hidden" name="rating"><input type="submit" class="btn btn-default" name="action" value="Rate 1" /> </form>'.
 					'<form method="post" action="/Exercise_controller/rateExercise" class="form-horizontal"> <input value="'. 
@@ -39,9 +42,12 @@ else if($data['resultType'] == 2){
 }else if($data['resultType'] == 3){
 	echo '<h1>Workout: </h1>';
 	foreach($data['searchResults'] as $item){
-		echo $item->title . ' Average Rating: ' . $item->average_rating. '<br> Posted by: ' . User_controller::getUsernameFromID($item->poster_id) . ' Posted on: ' . $item->posted_date . '<br>
+		$results = Helpers::getUsernameFromID($item->poster_id);
+		echo $item->title . ' Average Rating: ' . $item->average_rating. '<br> Posted by: ' . $results[0]->username . ' Posted on: ' . $item->posted_date . '<br>
 		<form method="post" action="/Workout_controller/addToFavorites" class="form-horizontal"> <input value="'. $item->workout_id .'" type="hidden" name="exercise_id">' . 
 				'<input type="submit" class="btn btn-default" name="action" value="Add To Favorites" /> </form>
+				<form method="post" action="/Post_controller/share" class="form-horizontal">
+				<input type="submit" class="btn btn-default" name="action" value="Share" /> </form>
 				<form method="post" action="/Workout_controller/rateWorkout" class="form-horizontal"> <input value="'. 
 					$item->workout_id .'" type="hidden" name="workout_id"><input value="1" type="hidden" name="rating"><input type="submit" name="action" value="Rate 1" /> </form>'.
 					'<form method="post" action="/Workout_controller/rateWorkout" class="form-horizontal"> <input value="'. 

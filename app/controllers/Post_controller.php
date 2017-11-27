@@ -1,11 +1,6 @@
 <?php
 
 class Post_controller extends Controller{
-	public function getPosts(){
-		$post = $this->model('post');
-		$results = $post->get();
-		return $results;
-	}
 	
 	public function myPosts(){
 		$post = $this->model('post');
@@ -24,7 +19,7 @@ class Post_controller extends Controller{
 			$post = $this->model('post');
 			$post->URL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 			$post->poster = $_SESSION['userID'];
-			$post->posted_date = 'NOW()';
+			$post->posted_date = "NOW()";
 			$post->likes = 0;
 			$post->post_id = 0;
 			$post->insert();

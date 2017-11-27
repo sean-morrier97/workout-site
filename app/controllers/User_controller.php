@@ -39,12 +39,6 @@ class User_controller extends Controller{
 		$following->delete();	
 	}
 	
-	public function getUsernameFromID($id){
-		$user = $this->model('Users');		
-		$user->where('id', '=', $id);
-		return $user->get();
-	}
-	
 	public function followInfo(){
 		$followees = $this->listOfFollowees();
 		$followers = $this->listOfFollowers();

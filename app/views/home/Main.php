@@ -103,9 +103,11 @@ Search: <input type="text" name="searchParam">
 </form>
 
 <?php
-$posts = Post_controller::getPosts();
+$posts = Helpers::getPosts();
+if($posts==null);
+else{
 foreach($posts as $item){
-	$user = User_controller::getUsernameFromID($item->poster);
+	$user = Helpers::getUsernameFromID($item->poster);
 	echo "<form method=\"post\" action=\"/Post_controller/likePost\" class=\"form-horizontal\">";
 	echo $user[0]->username . "<br>" . $item->posted_date . "<br><a href=" . $item->URL . ">Check this out!</a><input type=\"hidden\" 
 		name=\"post_id\" value=\"". $item->post_id . "\"><input type=\"submit\" class=\"btn btn-default\" 
@@ -114,12 +116,13 @@ foreach($posts as $item){
 	echo "<form method=\"get\" action=\"/Post_controller/commentOnPost\" class=\"form-horizontal\">
 		<input type=\"hidden\" name=\"post_id\" value=\"". $item->post_id . "\"><input type=\"submit\" class=\"btn btn-default\" 
 		name=\"action\" value=\"comment\"></form>";
-	$comments = Post_controller::getComments();
+	$comments = Helpers::getComments();
 	foreach($comments as $comment){
 		echo User_controller::getUsernameFromID($comment->poster)  . "<br>" . $comment->posted_date .  
 		"<br><h5>" . $comment->content . "<h5><form method=\"get\" action=\"/Post_controller/likeComment\" 
 		class=\"form-horizontal\"><input type=\"hidden\" name=\"post_id\" value=\"". $comment->id . "\">
 		<input type=\"submit\" class=\"btn btn-default\" name=\"action\" value=\"Like\"></form>";
 	}
+}
 }
 ?>
