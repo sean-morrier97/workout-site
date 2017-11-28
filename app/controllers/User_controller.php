@@ -114,10 +114,17 @@ class User_controller extends Controller{
 			$record = $this->model('personal_record');
 			$record->record_id = $_POST['record_id'];
 			$record->record = $_POST['record'];
+			$result = $record->get();
+			$record->user_id = $result[0]->user_id;
+			$record->exercise_id = $result[0]->exercise_id;
 			$record->update();
+			$exercise = $this->model('personal_record');
+			$exercise->where('user_id', '=', $_SESSION['userID']);
+			$results = $exercise->get();
+			$this->view('Users/personal_record', ['records'=>$results]);
 		}
 		else{
-			$this->view('Users/UpdateRecord', ['record_id'=>$_POST['record_id']]);
+			$this->view('Users/personal_record', ['record_id'=>$_POST['record_id']]);
 		}
 		
 	}
