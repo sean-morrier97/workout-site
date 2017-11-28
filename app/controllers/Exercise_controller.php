@@ -25,12 +25,13 @@ class Exercise_controller extends Controller{
 		if(isset($_POST['action'])){
 			$favorite_exercises = $this->model('favorite_exercises');
 			$favorite_exercises->exercise_id = $_POST['exercise_id']; 
+			$favorite_exercises->id = 0; 
 			$favorite_exercises->user_id = $_SESSION['userID'];
 			if(count($favorite_exercises->get())==0){
 				$favorite_exercises->insert();
-				$this->view('Home/Main', ['searchResults'=>null]);
+				$this->view('Home/Main');
 			}else{
-				$this->view('Home/Main', ['searchResults'=>null]);
+				$this->view('Home/Main');
 			}
 		}
 	}
@@ -69,6 +70,7 @@ class Exercise_controller extends Controller{
 				$rating->update();
 			}
 		}
+		$this->view('Home/Main');
 	}
 }
 ?>

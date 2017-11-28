@@ -1,6 +1,8 @@
 <?php
 
 class comment_like extends Model{
+	public $_PKName = 'id';
+    public $id; 
     public $comment_id; 
 	public $user_id;
 	

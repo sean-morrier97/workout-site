@@ -1,6 +1,7 @@
 <?php
 
 class post extends Model{
+	public $_PKName = 'post_id';
     public $post_id; 
 	public $likes;
 	public $posted_date;
@@ -11,13 +12,13 @@ class post extends Model{
 		parent::__construct();
 	}
 	
-	public function get(){
+	public function getAllPosts(){
 		$toQuery = "select * from post where poster in (select 
 			follower_id from following where followee_id = " . $_SESSION['userID'] . ")";
 		return parent::get($toQuery);
 	}
 	
 	public function getMyPosts(){
-		parent::get("select * from post where poster = " . $_SESSION['userID']);
+		return parent::get("select * from post where poster = " . $_SESSION['userID']);
 	}
 }

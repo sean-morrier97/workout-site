@@ -2,7 +2,7 @@
 class Helpers{
 	public function getPosts(){
 		$post = $this->model('post');
-		return $post->get();
+		return $post->getAllPosts();
 	}
 	public function getUsernameFromID($id){
 		$user = $this->model('Users');		
@@ -22,6 +22,13 @@ class Helpers{
 			$output[] = $con;
 		}
 		return $output;
+	}
+	
+	public function getComments($post_id){
+		$comments = $this->model('comments');
+		$comments->where('post_id', '=', $post_id);
+		$results = $comments->get();
+		return $results;
 	}
 }
 	

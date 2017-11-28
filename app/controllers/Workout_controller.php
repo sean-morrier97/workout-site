@@ -69,15 +69,24 @@ class Workout_controller extends Controller{
 	public function rateWorkout(){
 		if(isset($_POST['action'])){
 			$workout = $this->model('workout_rating');
-			$workout->workout_id = $_POST['workout_id']; 
-			$workout->user_id = $_SESSION['userID'];
+			$workout->where('user_id', '=', $_SESSION['userID']);
+			$workout->where('workout_id', '=', $_POST['workout_id']);
 			$workout->rating = $_POST['rating'];
-			if($workout->doesExist() == null){
-				$workout->insert();
-			}else{
+			$results = $workout->get();
+			if(count($results)!=0){
+				$workout->where('id', '=', $results[0]->id);
 				$workout->update();
+			}else{
+				$workout->workout_id = $_POST['workout_id']; 
+				$workout->user_id = $_SESSION['userID'];
+				$workout->insert();
 			}
+			$this->view('Home/main');
 		}
+	}
+	public function viewWorkout(){
+		$this->view('workout/display', ['workout_id'=>$_POST['workout_id']]);
+		echo $_POST['workout_id'];
 	}
 }
 ?>

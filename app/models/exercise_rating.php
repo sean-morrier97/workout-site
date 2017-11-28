@@ -1,6 +1,8 @@
 <?php
 
 class exercise_rating extends Model{
+	public $_PKName = 'id';
+    public $id;
     public $post_id;
 	public $user_id;
 	public $rating;

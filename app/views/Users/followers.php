@@ -7,7 +7,7 @@
 
 <?php
 foreach($data['followers'] as $follower){
-	$user = User_controller::getUsernameFromID($follower->follower_id);
+	$user = Helpers::getUsernameFromID($follower->follower_id);
     echo $user[0]->username . ' ' . $follower->status.
 	'<form method="post" action="/User_controller/unfollowUser" class="form-horizontal">
 	<input type="submit" class="btn btn-default" name="action" value="Unfollow" />
@@ -20,7 +20,7 @@ echo '<br>';
 
 <?php
 foreach($data['followees'] as $followee){
-	$user = User_controller::getUsernameFromID($followee->followee_id);
+	$user = Helpers::getUsernameFromID($followee->followee_id);
     echo $user[0]->username . ' ' . $followee->status;
 }
 ?>

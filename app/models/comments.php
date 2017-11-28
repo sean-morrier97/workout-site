@@ -1,6 +1,7 @@
 <?php
 
 class comments extends Model{
+	public $_PKName = 'id';
     public $id; 
 	public $content;
 	public $likes;
@@ -12,12 +13,4 @@ class comments extends Model{
 		parent::__construct();
 	}
 	
-	public function muscles($id, $content, $likes, $posted_date, $poster, $post_id){
-		$this->$id = $id;
-		$this->$content = $content;
-		$this->$likes = $likes;
-		$this->$posted_date = $posted_date;
-		$this->$poster = $poster;
-		$this->$post_id = $post_id;
-	}
 }

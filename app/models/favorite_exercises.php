@@ -1,6 +1,7 @@
 <?php
 
 class favorite_exercises extends Model{
+	public $id;
     public $exercise_id; 
 	public $user_id;
 	

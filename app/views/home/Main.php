@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <head>
-<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
-<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
-<link rel="stylesheet" type="text/css" href="css/simple-sidebar.css">
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.bundle.min.js"></script>
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.css">
+<link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.min.css">
+<link rel="stylesheet" type="text/css" href="/css/simple-sidebar.css">
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
 </head>
 
 						
@@ -103,6 +102,7 @@ Search: <input type="text" name="searchParam">
 </form>
 
 <?php
+echo "http://$_SERVER[HTTP_HOST]/Workout_controller/viewWorkout?workout_id=1";
 $posts = Helpers::getPosts();
 if($posts==null);
 else{
@@ -111,17 +111,18 @@ foreach($posts as $item){
 	echo "<form method=\"post\" action=\"/Post_controller/likePost\" class=\"form-horizontal\">";
 	echo $user[0]->username . "<br>" . $item->posted_date . "<br><a href=" . $item->URL . ">Check this out!</a><input type=\"hidden\" 
 		name=\"post_id\" value=\"". $item->post_id . "\"><input type=\"submit\" class=\"btn btn-default\" 
-		name=\"action\" value=\"Like\"></form>";
-		
-	echo "<form method=\"get\" action=\"/Post_controller/commentOnPost\" class=\"form-horizontal\">
-		<input type=\"hidden\" name=\"post_id\" value=\"". $item->post_id . "\"><input type=\"submit\" class=\"btn btn-default\" 
+		name=\"action\" value=\"" . $item->likes . "&#32;Like\"></form>";
+		echo $item->post_id;
+	echo "<form method=\"post\" action=\"/Post_controller/commentOnPost\" class=\"form-horizontal\">
+		<input type=\"hidden\" name=\"post_id\" value=\"". $item->post_id . "\"><input type=\"text\" name=\"comment\" value=\"\"><input type=\"submit\" class=\"btn btn-default\" 
 		name=\"action\" value=\"comment\"></form>";
-	$comments = Helpers::getComments();
+	$comments = Helpers::getComments($item->post_id);
 	foreach($comments as $comment){
-		echo User_controller::getUsernameFromID($comment->poster)  . "<br>" . $comment->posted_date .  
-		"<br><h5>" . $comment->content . "<h5><form method=\"get\" action=\"/Post_controller/likeComment\" 
-		class=\"form-horizontal\"><input type=\"hidden\" name=\"post_id\" value=\"". $comment->id . "\">
-		<input type=\"submit\" class=\"btn btn-default\" name=\"action\" value=\"Like\"></form>";
+		$user = Helpers::getUsernameFromID($comment->poster);
+		echo $user[0]->username  . "<br>" . $comment->posted_date .  
+		"<br><h5>" . $comment->content . "<h5><form method=\"post\" action=\"/Post_controller/likeComment\" 
+		class=\"form-horizontal\"><input type=\"hidden\" name=\"comment_id\" value=\"". $comment->id . "\">
+		<input type=\"submit\" class=\"btn btn-default\" name=\"action\" value=\"" . $comment->likes . "&#32;Like\"></form><br><br>";
 	}
 }
 }
