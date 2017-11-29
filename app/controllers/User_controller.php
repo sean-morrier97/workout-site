@@ -91,8 +91,10 @@ class User_controller extends Controller{
 		if(isset($_POST['action'])){
 			$record = $this->model('personal_record');
 			$record->where('user_id', '=', $_SESSION['userID']);
-			$record->where('exercise_id', '=', $_POST['exercise_id']);
 			$results = $record->get();
+			$record->user_id = $results[0]->user_id;
+			$record->exercise_id = $results[0]->exercise_id;
+			//where('exercise_id', '=', $_POST['exercise_id']);
 			if(count($results)==0){
 				$record->exercise_id = $_POST['exercise_id'];
 				$record->record_id = 0;
@@ -100,7 +102,7 @@ class User_controller extends Controller{
 				$record->user_id = $_SESSION['userID'];
 				$record->insert();
 			}else{
-				$this->view('Users/updateRecord', ['exercise_id'=>$_POST['exercise_id']]);
+				$this->view('Users/createRecord', ['exercise_id'=>$results]);
 			}
 		}
 		else{
