@@ -53,7 +53,7 @@ class Exercise_controller extends Controller{
 		$fav_exercise = $this->model('favorite_exercises');
 		$fav_exercise->user_id = $_SESSION['userID'];
 		$results = $fav_exercise->joinedGet();
-		$this->view('Exercises/fav_exercises', ['favorites'=>$results]);
+		$this->view('Exercises/fav_exercises', ['favoriteExercises'=>$results]);
 	}
 	
 	public function rateExercise(){

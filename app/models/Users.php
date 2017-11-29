@@ -1,6 +1,7 @@
 <?php
 
 class users extends Model{
+	public $_PKName = 'id';
     public $id;
 	public $username; 
 	public $email;
@@ -13,4 +14,7 @@ class users extends Model{
 		parent::__construct();	
 	}
 	
+	public function update(){
+		parent::update("UPDATE Users set privacy_setting = " . $this->privacy_setting . " where id = " . $this->id);
+	}
 }

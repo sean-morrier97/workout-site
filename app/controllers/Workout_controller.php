@@ -34,15 +34,14 @@ class Workout_controller extends Controller{
 	public function addToFavorites(){
 		if(isset($_POST['action'])){
 			$workout = $this->model('favorite_workout');
-			$workout->where('workout_id', '=', $_POST['workout_id']); 
-			$workout->where('user_id', '=', $_SESSION['userID']);
-			$results = $workout->get();
-			if(count($results) == 0){
-				$workout->user_id = $_SESSION['userID'];
-				$workout->workout_id = $_POST['workout_id']; 
+			$workout->workout_id = $_POST['workout_id']; 
+			$workout->id = 0; 
+			$workout->user_id = $_SESSION['userID'];
+			if(count($workout->get())==0){
 				$workout->insert();
+				$this->view('Home/Main');
 			}else{
-				//display error message
+				$this->view('Home/Main');
 			}
 		}
 	}

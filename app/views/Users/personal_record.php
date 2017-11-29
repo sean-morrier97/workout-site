@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
 <h1>Personal Records</h1><br>
-<form method="post" action="/User_controller/createPR" class="form-horizontal">
+<form method="get" action="/User_controller/createPR" class="form-horizontal">
 <input type="submit" class="btn btn-default" name="action" value="Create Personal Record" /><br>
 </form>
 <br>

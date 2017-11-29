@@ -5,11 +5,14 @@ class User_controller extends Controller{
 	public function settings(){
 		$this->view('Users/settings');
 	}
+	
 	public function setAccountPrivacy(){
 		$user = $this->model('Users');
 		$user->privacy_setting = $_POST['pSettings'];
 		$user->id = $_SESSION['userID'];
 		$user->update();
+		$this->view('Home/Main');
+		
 	}
 	//undelete account when they login function(<- must be changed))
 	public function deleteAccount(){
@@ -90,20 +93,12 @@ class User_controller extends Controller{
 		
 		if(isset($_POST['action'])){
 			$record = $this->model('personal_record');
-			$record->where('user_id', '=', $_SESSION['userID']);
-			$results = $record->get();
-			$record->user_id = $results[0]->user_id;
-			$record->exercise_id = $results[0]->exercise_id;
-			//where('exercise_id', '=', $_POST['exercise_id']);
-			if(count($results)==0){
-				$record->exercise_id = $_POST['exercise_id'];
-				$record->record_id = 0;
-				$record->record = $_POST['record'];
-				$record->user_id = $_SESSION['userID'];
-				$record->insert();
-			}else{
-				$this->view('Users/createRecord', ['exercise_id'=>$results]);
-			}
+			$record->user_id = $_SESSION['userID'];
+			$record->exercise_id = $_POST['exercises'];
+			$record->record_id = 0;
+			$record->record = $_POST['record'];
+			$record->insert();
+			
 		}
 		else{
 			$this->view('Users/createRecord', ['exercise_id'=>$_POST['exercise_id']]);

@@ -9,7 +9,7 @@ Exercise: <select name="exercises">
 $exercise = $this->model('exercise');
 $results = $exercise->get();
 foreach($results as $items){
-	echo '<option value="' . $items->exercise_id . '"/>' . $items->title . '</option>';
+	echo '<option value="' . $items->exercise_id . '" name = "exercise_id"/>' . $items->title . '</option>';
 }
 ?>
 </select><br>
