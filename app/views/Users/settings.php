@@ -1,3 +1,6 @@
+<!--
+A view that displays the user's settings
+-->
 <!DOCTYPE html>
 <head>
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
@@ -83,6 +86,9 @@
     document.getElementById("logoutForm").submit();
 	}
     </script>
+<!--
+The form to set the user's privacy
+-->
 <form method="post" action="/User_controller/setAccountPrivacy" class="form-horizontal">
 <select name="pSettings">
 	<option value="1">Private</option>
@@ -90,7 +96,9 @@
 </select>
 <input type="submit" class="btn btn-default" name="action" value="Update" />
 </form>
-
+<!--
+A button to delete an account
+-->
 <form method="post" action="/User_controller/deleteAccount" class="form-horizontal">
 <input type="submit" class="btn btn-default" name="action" value="Delete Account" />
 </form>

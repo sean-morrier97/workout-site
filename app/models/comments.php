@@ -1,6 +1,9 @@
 <?php
-
+/*
+A class that instantiates the fields for comments table
+*/
 class comments extends Model{
+	//The fields that are used in the comments table
 	public $_PKName = 'id';
     public $id; 
 	public $content;

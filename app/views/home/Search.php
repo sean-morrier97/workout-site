@@ -1,3 +1,6 @@
+<!--
+A view that displays all the search results
+-->
 <!DOCTYPE html>
 <head>
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
@@ -82,10 +85,11 @@
 	}
     </script>
 <?php
-
+//A condition that decides what the user searches by 
 if($data['searchResults']==null);
 else if($data['resultType'] == 2){
 	echo '<h1>Exercises: </h1>';
+	//The loop that displays exercises
 	foreach($data['searchResults'] as $item){
 		$results = Helpers::getUsernameFromID($item->poster_id);
 		echo $item->title . ' Average Rating: ' . $item->number_of_ratings . '<br> Posted By: ' . $results[0]->username . ' Posted on: ' . $item->posted_date . 
@@ -111,7 +115,7 @@ else if($data['resultType'] == 2){
 					$item->exercise_id .'" type="hidden" name="exercise_id"><input value="5" type="hidden" name="rating"><input type="submit" class="btn btn-default" name="action" value="Rate 5" /> </form><br><br>';
 	}
 }else if($data['resultType'] == 1){
-
+	//The loop that displays the users
 	echo '<h1>Users: </h1>';
 	foreach($data['searchResults'] as $item){
 		echo 'Username: ' . $item->username . '<br> Email: ' . $item->email . '<br> Date of Birth: ' . $item->dob .
@@ -120,6 +124,7 @@ else if($data['resultType'] == 2){
 	}
 }else if($data['resultType'] == 3){
 	echo '<h1>Workout: </h1>';
+	//The loop that displays the workouts
 	foreach($data['searchResults'] as $item){
 		$results = Helpers::getUsernameFromID($item->poster_id);
 		echo $item->title . ' Average Rating: ' . $item->average_rating. '<br> Posted by: ' . $results[0]->username . ' Posted on: ' . $item->posted_date . '<br>

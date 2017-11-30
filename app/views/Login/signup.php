@@ -1,3 +1,6 @@
+<!--
+A view that displays the registration form
+-->
 <!DOCTYPE html>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">

@@ -24,7 +24,7 @@ class Helpers{
 		$results = $user->get();
 		if(count($results) == 0){
 			$user->username = 'Unknown';
-			$results = array($user)
+			$results = array($user);
 		}
 		return $results;
 	}

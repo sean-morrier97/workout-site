@@ -1,3 +1,6 @@
+<!--
+A view that displays the personal records
+-->
 <!DOCTYPE html>
 <head>
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
@@ -89,9 +92,11 @@
 </form>
 <br>
 <?php
+//The condition that decides whether there are personal records or not
 if($data['records'] == null)
 	echo "You dont have any personal records yet";
 else{
+	//The loop that displays the personal records
 	foreach($data['records'] as $item){
 		echo "Exercise: " . Helpers::getExerciseTitle($item->exercise_id)->title . "<br>";
 		echo "Record: " . $item->record . "<br><form method=\"post\" action=\"/User_controller/updatePR\" class=\"form-horizontal\">

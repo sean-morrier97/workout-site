@@ -1,3 +1,6 @@
+<!--
+A view that creates a form to add an exercise to a workout
+-->
 <!DOCTYPE html>
 <head>
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">

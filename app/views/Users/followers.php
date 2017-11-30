@@ -1,3 +1,6 @@
+<!--
+A view that displays all the followers and followees 
+-->
 <!DOCTYPE html>
 <head>
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
@@ -86,8 +89,9 @@
 <h2>Followees:</h2>
 
 <?php
+//The loop to display the followees
 foreach($data['followers'] as $follower){
-	$user = Helpers::getUsernameFromID($follower->follower_id);
+	$user = Helpers::getUsernameFromID($follower->follower_id);//Calls getUsernameFromID function
     echo $user[0]->username .
 	'<form method="post" action="/User_controller/unfollowUser" class="form-horizontal">
 	<input type="submit" class="btn btn-default" name="action" value="Unfollow" />
@@ -99,14 +103,15 @@ echo '<br>';
 <h2>Followers:</h2>
 
 <?php
+//The loop to display the followers
 foreach($data['followees'] as $followee){
-	$user = Helpers::getUsernameFromID($followee->followee_id);
+	$user = Helpers::getUsernameFromID($followee->followee_id);//Calls getUsernameFromID function
     echo $user[0]->username . ' ' . $followee->status;
 	if(status == 1){
 		echo '<form method="post" action="/User_controller/acceptFollowing" class="form-horizontal">
 			<input type="submit" class="btn btn-default" name="action" value="Accept" />
 			<input type="hidden" class="btn btn-default" name="id" value="' . $follower->id . '" />
-			</form></br>'
+			</form></br>';
 	}
 }
 ?>

@@ -1,3 +1,6 @@
+<!--
+A view that displays user's information
+-->
 <!DOCTYPE html>
 <head>
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
@@ -86,6 +89,7 @@
 <h1>User Information:</h1>
 <?php
 $user = $data['user'];
+//A condition that decides to perform an action depending on user's privacy
 if($user != null){
 	echo "Username: " .$user->username. "<br>";
 	echo "Email: " . $user->email . "<br>";

@@ -1,6 +1,9 @@
 <?php
-
+/*
+A class that instantiate the fields for workout table
+*/
 class workout extends Model{
+	//The fields that are used in the workout table
     public $workout_id; 
 	public $title;
 	public $number_of_ratings;

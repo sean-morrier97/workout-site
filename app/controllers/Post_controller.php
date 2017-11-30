@@ -17,7 +17,7 @@ class Post_controller extends Controller{
 		$this->view('home/myPosts');
 	}
 	
-	//A funciton to share a post
+	//A function to share a post
 	public function share(){
 		$post = $this->model('post');
 		//if($_POST['type'] == 1)

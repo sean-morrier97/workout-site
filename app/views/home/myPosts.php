@@ -1,3 +1,6 @@
+<!--
+A view that outputs the user's posts
+-->
 <!DOCTYPE html>
 <head>
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
@@ -85,9 +88,10 @@
     </script>
 My posts:
 <?php
-$posts = Helpers::myPosts();
+$posts = Helpers::myPosts();//Calls myPosts function
+//The loop that outputs the posts
 foreach($posts as $item){
-	$user = Helpers::getUsernameFromID($item->poster);
+	$user = Helpers::getUsernameFromID($item->poster);//Calls getUsernameFromID function
 	echo "<form method=\"post\" action=\"/Post_controller/likePost\" class=\"form-horizontal\">";
 	echo $user[0]->username . "<br>" . $item->posted_date . "<br><a href=" . $item->URL . ">Check this out!</a><input type=\"hidden\" 
 		name=\"post_id\" value=\"". $item->post_id . "\"><input type=\"submit\" class=\"btn btn-default\" 
@@ -98,7 +102,8 @@ foreach($posts as $item){
 	echo "<form method=\"post\" action=\"/Post_controller/commentOnPost\" class=\"form-horizontal\">
 		<input type=\"hidden\" name=\"post_id\" value=\"". $item->post_id . "\"><input type=\"text\" name=\"comment\" value=\"\"><input type=\"submit\" class=\"btn btn-default\" 
 		name=\"action\" value=\"comment\"></form>";
-	$comments = Helpers::getComments($item->post_id);
+	$comments = Helpers::getComments($item->post_id);//Calls getComments function
+	//The loop to show the post comments
 	foreach($comments as $comment){
 		$user = Helpers::getUsernameFromID($comment->poster);
 		echo $user[0]->username  . "<br>" . $comment->posted_date .  
