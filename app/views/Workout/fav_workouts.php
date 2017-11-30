@@ -1,3 +1,6 @@
+<!--
+A view that displays favorite workouts 
+-->
 <!DOCTYPE html>
 <head>
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
@@ -85,6 +88,7 @@
     </script>
 Favorite workouts
 <?php
+//A condition that chooses what action to do depending on if the user has favorite workouts or not 
 if($data['favoritesWorkout']==null)
 	echo "No Workouts yet";
 else{

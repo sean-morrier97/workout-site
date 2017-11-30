@@ -1,3 +1,6 @@
+<!--
+A view that displays a form to create a personal record
+-->
 <!DOCTYPE html>
 <head>
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
@@ -82,7 +85,7 @@
 	document.getElementById("logout").onclick = function() {
     document.getElementById("logoutForm").submit();
 	}
-    </script>\
+    </script>
 <form method="post" action="/User_controller/createPR" class="form-horizontal">
 Exercise: <select name="exercises">
 <?php

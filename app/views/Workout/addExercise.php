@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 	<!DOCTYPE html>
+=======
+<!--
+A view that creates a form to add an exercise to a workout
+-->
+<!DOCTYPE html>
+>>>>>>> c74dee49af173c021bb817957894d8256c149baf
 <head>
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
