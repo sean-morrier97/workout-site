@@ -97,6 +97,11 @@ The home view that lets the user to see posts and search for users, workouts and
 <input type="submit" class="btn btn-default" name="action" value="My Posts" />
 </form>
 
+<form method="get" action="/Exercise_controller/createExercise" class="form-horizontal">
+<input type="submit" class="btn btn-default" name="action" value="Create Exercise" />
+</form>
+
+
 <form method="post" action="/Home/search" class="form-horizontal">
 Search: <input type="text" name="searchParam">
 <select name="searchOptions">

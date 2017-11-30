@@ -17,10 +17,21 @@ class Exercise_controller extends Controller{
 			$exercise->average_rating = 0;
 			$exercise->poster_id = $_SESSION['userID'];
 			$exercise->exercise_id = 0;
-			$exerciseDetail->exercise_id = $exercise->insert();
-			$exerciseDetail->muscle_id = $_POST['muscle_group_id'];
+			$id = $exercise->insert();
+			$exerciseDetail->exercise_id = $id;
+			$exerciseDetail->muscle_id = $_POST['mainMuscle'];
 			$exerciseDetail->insert();
-			echo $exercise->posted_date;
+			if($_POST['secondaryMuscle']!=-1){
+				$exerciseDetail->muscle_id = $_POST['mainMuscle'];
+				$exerciseDetail->insert();
+			}
+			if($_POST['otherMuscle']!=-1){
+				$exerciseDetail->muscle_id = $_POST['otherMuscle'];
+				$exerciseDetail->insert();
+			}
+			$this->view('Home/Main');
+		}else{
+			$this->view('Exercises/create');			
 		}
     }
 	
@@ -53,6 +64,7 @@ class Exercise_controller extends Controller{
 			}else{
 				//display error message
 			}
+			$this->view('Home/Main');
 		}
 	}
 	

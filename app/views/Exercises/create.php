@@ -88,15 +88,34 @@ A view that creates a form to create an exercise
     </script>
 <form method="post" action="/Exercise_controller/createExercise" class="form-horizontal">
 Title: <input type="text" name="title"><br>
-Muscle group: <select name="muscleGroup">		  
+Main Muscle: <select name="mainMuscle">		  
 <?php
-$exercise = $this->model('muscle_group');
+$exercise = $this->model('muscles');
 $results = $exercise->get();
-foreach($results as $group ){
-	echo '<option value="'.$group->muscle_group_id. '"/>'.$group->muscle_group_name.'</option>';
+foreach($results as $item ){
+	echo '<option value="'.$item->muscle_id. '"/>'.$item->muscle_name.'</option>';
 }
 ?>
 </select><br>
-Muscle group: <input type="text" name="muscle_group_id"><br>
+Secondary Muscle: <select name="secondaryMuscle">		  
+<?php
+$exercise = $this->model('muscles');
+$results = $exercise->get();
+echo '<option value=-1 />None</option>';
+foreach($results as $item ){
+	echo '<option value="'.$item->muscle_id. '"/>'.$item->muscle_name.'</option>';
+}
+?>
+</select><br>
+Other Muscle: <select name="otherMuscle">		  
+<?php
+$exercise = $this->model('muscles');
+$results = $exercise->get();
+echo '<option value=-1 />None</option>';
+foreach($results as $item ){
+	echo '<option value="'.$item->muscle_id. '"/>'.$item->muscle_name.'</option>';
+}
+?>
+</select><br>
 <input type="submit" class="btn btn-default" name="action" value="Create" />
 </form>

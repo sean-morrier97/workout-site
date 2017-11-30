@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <head>
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
@@ -10,50 +10,50 @@
 </head>						
 <div id="wrapper">
 	<div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-				<form id="homeForm" method="post" action="/Home/Main">
-					<li class="sidebar-brand">
-						<a id = "home" type="submit" name="action" />Home</a>
-					</li>
-				</form>	
-                <form id="favoritesForm" method="post" action="/Exercise_controller/viewFavorites">
-					<li class="sidebar-brand">
-						<a id = "favorites" name="action" />Favorites</a>
-					</li>
-				</form>	
-				<form id="settingsForm" method="GET" action="/User_controller/settings">		
-					<li>
-						<a id = "settings" name="action">Settings</a>
-					</li>
-				</form>	
-				<form id="followersForm" method="GET" action="/User_controller/followInfo">		
-					<li>
-						<a id = "followers" name="action">Followers</a>
-					</li>
-				</form>	
-				<form id="workoutForm" method="GET" action="/Workout_controller/createWorkout">		
-					<li>
-						<a id = "workout" name="action">Create Workout</a>
-					</li>
-				</form>	
-				<form id="prForm" method="GET" action="/User_controller/getPR">		
-					<li>
-						<a id = "pr" name="action">Personal Records</a>
-					</li>
-				</form>	
-				<form id="logoutForm" method="Post" action="/Login/logout">		
-					<li>
-						<a id = "logout" name="action">Logout</a>
-					</li>
-				</form>	
-            </ul>
-        </div>
-		<div>
-            <div class="container-fluid">
-                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Gainz</a>
-            </div>
-        </div>
+		<ul class="sidebar-nav">
+			<form id="homeForm" method="post" action="/Home/Main">
+				<li class="sidebar-brand">
+					<a id = "home" type="submit" name="action" />Home</a>
+				</li>
+			</form>	
+			<form id="favoritesForm" method="post" action="/Exercise_controller/viewFavorites">
+				<li class="sidebar-brand">
+					<a id = "favorites" name="action" />Favorites</a>
+				</li>
+			</form>	
+			<form id="settingsForm" method="GET" action="/User_controller/settings">		
+				<li>
+					<a id = "settings" name="action">Settings</a>
+				</li>
+			</form>	
+			<form id="followersForm" method="GET" action="/User_controller/followInfo">		
+				<li>
+					<a id = "followers" name="action">Followers</a>
+				</li>
+			</form>	
+			<form id="workoutForm" method="GET" action="/Workout_controller/createWorkout">		
+				<li>
+					<a id = "workout" name="action">Create Workout</a>
+				</li>
+			</form>	
+			<form id="prForm" method="GET" action="/User_controller/getPR">		
+				<li>
+					<a id = "pr" name="action">Personal Records</a>
+				</li>
+			</form>	
+			<form id="logoutForm" method="Post" action="/Login/logout">		
+				<li>
+					<a id = "logout" name="action">Logout</a>
+				</li>
+			</form>	
+		</ul>
 	</div>
+	<div>
+		<div class="container-fluid">
+			<a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Gainz</a>
+		</div>
+	</div>
+</div>
 <script>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
@@ -82,19 +82,27 @@
 	}
     </script>
 <p>Add exercise to which workout out?</p>
-<form method="post" action="/Workout_controller/addExercise" class="form-horizontal">
-Exercise: <select name="workout_id">
+<form method="post" action="/Workout_controller/addExercisePost" class="form-horizontal">
+Exercise: 
 <?php
 $workouts = $this->model('workout');
-$workouts->where('poster_id', '=', $_SESSION['userId']);
-$result = $workout->get();
-foreach($result as $item){
-	echo '<option value="' . $items->workout_id . '"/>' . $items->title . '</option>';
+$workouts->where('poster_id', '=', $_SESSION['userID']);
+$result = $workouts->get();
+if(count($result)==0){
+	echo 'You must create a workout first<br>';
+}else{
+	echo "<select name=\"workout_id\">";
+	foreach($result as $item){
+		echo '<option value="' . $item->workout_id . '"/>' . $item->title . '</option>';
+	}
+	echo '
+		</select><br> 
+		Sets: <input type="text" name="sets"/><br> 
+		Repetitions: <input type="text" name="reps"/><br>
+		<input type="hidden" name="exercise_id" value="' . $data['exercise_id'] . '"/>
+		<input type="submit" class="btn btn-default" name="action" value="Add to workout"/>';
 }
 
 ?>
-</select> 
-Sets: <input type="text" name="sets">
-Repititions: <input type="text" name="reps">
-<input type="submit" class="btn btn-default" name="action" value="Add to workout">
+
 </form>
