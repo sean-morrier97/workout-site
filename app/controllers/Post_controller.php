@@ -1,19 +1,24 @@
 <?php
-
+/*
+The controller that handles actions related to posts
+*/
 class Post_controller extends Controller{
 	
+	//A function that gets all posts
 	public function myPosts(){
 		$post = $this->model('post');
 		$results = $post->getMyPosts();
 		return $results;
 	}
 	
+	//A function to delete a post
 	public function deletePost(){
 		$post = $this->model('post');
 		$post->post_id = $_POST['post_id'];
 		$post->delete();
 	}
 	
+	//A funciton to share a post
 	public function share(){
 		$post = $this->model('post');
 		//if($_POST['type'] == 1)
@@ -26,6 +31,7 @@ class Post_controller extends Controller{
 		$this->view('Home/Main');
 	}
 	
+	//A function to like a post
 	public function likePost(){
 		$post = $this->model('post');
 		$post = $post->where('post_id', '=', $_POST['post_id'])->get();
@@ -50,7 +56,7 @@ class Post_controller extends Controller{
 		$this->view('home/main');
 	}
 
-	
+	//A function to comment on a post
 	public function commentOnPost(){
 		$comment = $this->model('comments');
 		$comment->id = 0;
@@ -63,6 +69,7 @@ class Post_controller extends Controller{
 		$this->view('home/main');
 	}
 	
+	//A function to like comment on a post
 	public function likeComment(){
 		$comment = $this->model('comments');
 		$comment->where('id', '=', $_POST['comment_id']);

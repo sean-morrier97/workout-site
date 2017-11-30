@@ -1,5 +1,10 @@
 <?php
+/*
+Login controller that handles login, logout and registration
+*/
 class Login extends Controller{
+	
+	//The function that lets the user to log in to the website
 	public function index(){
 		$user = $this->model('Users');
 		if(isset($_POST['action'])){
@@ -12,7 +17,7 @@ class Login extends Controller{
 		}
 	}
 
-
+	//The function that lets the user to register on the website
 	public function signup(){
 		$user = $this->model('Users');
 		try{
@@ -39,6 +44,7 @@ class Login extends Controller{
 		}
 	}
 	
+	//The function that lets the user to log out from the website 
 	public function logout(){
 		LoginCore::logout();
 		header('location:/Login');

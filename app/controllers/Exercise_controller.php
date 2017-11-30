@@ -1,7 +1,11 @@
 <?php
-
+/*
+An exercise controller that handles all actions that are related 
+to exercises
+*/
 class Exercise_controller extends Controller{
-
+	
+	//A function to create an exercise
 	public function createExercise()
 	{
 		if(isset($_POST['action'])){
@@ -20,7 +24,7 @@ class Exercise_controller extends Controller{
 		}
     }
 	
-	
+	//A function that performs an action of adding an exercise to favorites
 	public function addToFavorites(){
 		if(isset($_POST['action'])){
 			$favorite_exercises = $this->model('favorite_exercises');
@@ -36,6 +40,7 @@ class Exercise_controller extends Controller{
 		}
 	}
 	
+	//A function that performs an action of removing an exercise from favorite
 	public function removeFromFavorites(){
 		if(isset($_POST['action'])){
 			$favorite_exercises = $this->model('favorite_exercises');
@@ -49,6 +54,7 @@ class Exercise_controller extends Controller{
 		}
 	}
 	
+	//A function that shows all favorite exercises
 	public function viewFavorites(){
 		$fav_exercise = $this->model('favorite_exercises');
 		$fav_exercise->user_id = $_SESSION['userID'];
@@ -56,6 +62,7 @@ class Exercise_controller extends Controller{
 		$this->view('Exercises/fav_exercises', ['favoriteExercises'=>$results]);
 	}
 	
+	//A function that changes the rating of an exercise
 	public function rateExercise(){
 		if(isset($_POST['action'])){
 			$rating = $this->model('exercise_rating');

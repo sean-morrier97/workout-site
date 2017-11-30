@@ -1,11 +1,16 @@
 <?php
-
+/*
+A controller that handles user related actions
+*/
 class User_controller extends Controller{
 	private $deletedAccountStatus = 0;
+	
+	//The function redirects the user to the settings view
 	public function settings(){
 		$this->view('Users/settings');
 	}
 	
+	//A function to change the account privacy
 	public function setAccountPrivacy(){
 		$user = $this->model('Users');
 		$user->privacy_setting = $_POST['pSettings'];
@@ -15,6 +20,7 @@ class User_controller extends Controller{
 		
 	}
 	//undelete account when they login function(<- must be changed))
+	//A function to delete an account
 	public function deleteAccount(){
 		$user = $this->model('Users');
 		$user->id = $_SESSION['userID'];
@@ -23,6 +29,7 @@ class User_controller extends Controller{
 		LoginCore::logout();
 	}
 	
+	//A function to follow a user
 	public function followUser(){
 		$user = $this->model('following');
 		$user->id = 0;
@@ -36,18 +43,21 @@ class User_controller extends Controller{
 		$user->insert();
 	}
 	
+	//A function to unfollow a user
 	public function unfollowUser(){
 		$following = $this->model('following');
 		$following->ID = $_POST['id'];
 		$following->delete();	
 	}
 	
+	//
 	public function followInfo(){
 		$followees = $this->listOfFollowees();
 		$followers = $this->listOfFollowers();
 		$this->view('Users/followers', ['followers'=>$followers, 'followees'=>$followees]);		
 	}
 	
+	//A function to show the list of followers
 	public function listOfFollowers(){
 		$following = $this->model('following');
 		$following->where('followee_id', '=', $_SESSION['userID']);
@@ -55,6 +65,7 @@ class User_controller extends Controller{
 		return $results;
 	}
 	
+	//A function to show the list of followees
 	public function listOfFollowees(){
 		$following = $this->model('following');
 		$following->where('follower_id', '=', $_SESSION['userID']);
@@ -62,6 +73,7 @@ class User_controller extends Controller{
 		return $results;
 	}
 	
+	//A function to view a user's profile
 	public function viewProfile(){
 		$user = $this->model('Users');
 		$result = $user->find($_POST['userID']);
@@ -83,12 +95,15 @@ class User_controller extends Controller{
 			$this->view('Users/User_info', ['user'=>$result]);
 	}
 	
+	//A function to show all personal records
 	public function getPR(){
 		$exercise = $this->model('personal_record');
 		$exercise->where('user_id', '=', $_SESSION['userID']);
 		$results = $exercise->get();
 		$this->view('Users/personal_record', ['records'=>$results]);
 	}
+	
+	//A function to create a personal record
 	public function createPR(){
 		
 		if(isset($_POST['action'])){
@@ -106,6 +121,7 @@ class User_controller extends Controller{
 		
 	}
 	
+	//A function to update a personal record
 	public function updatePR(){
 		if(isset($_POST['action'])){
 			$record = $this->model('personal_record');
@@ -123,7 +139,6 @@ class User_controller extends Controller{
 		else{
 			$this->view('Users/personal_record', ['record_id'=>$_POST['record_id']]);
 		}
-		
 	}
 }
 ?>

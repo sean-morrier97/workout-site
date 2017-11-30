@@ -1,17 +1,22 @@
 <?php
-
+/*
+Home controller that handles actions on the main page 
+*/
 class Home extends Controller{
-
+	
 	public function index($name = '')
 	{
         $user = $this->model('User');
         $user->name = $name;
         $this->view('home/index');
     }
+	
+	//A function that redirects the user to the main page
 	public function Main(){
 		$this->view('home/Main');
 	}    
 	
+	//A function that lets the user search for users, exercises or workouts by name
 	public function search(){
 		if(isset($_POST['action'])){
 			$searchParam = $_POST['searchParam'];

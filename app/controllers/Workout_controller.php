@@ -1,7 +1,11 @@
 <?php
-
+/*
+Workout controller that handles all actions related to workouts
+*/
 class Workout_controller extends Controller{
 	private $workoutDetail;
+	
+	//A function to create a workout
 	public function createworkout()
 	{
 		if(isset($_POST['action'])){
@@ -19,6 +23,7 @@ class Workout_controller extends Controller{
 		}
     }
 	
+	//A function to add an exercise to a workout
 	public function addExercise(){
 		if(isset($_POST['action'])){
 			$workoutDetail->exercise_id = $_POST['exercise_id'];
@@ -30,7 +35,7 @@ class Workout_controller extends Controller{
 	}
 	//remove muscle group and postition from workout_detail
 
-	
+	//A function to add a workout to favorites
 	public function addToFavorites(){
 		if(isset($_POST['action'])){
 			$workout = $this->model('favorite_workout');
@@ -46,6 +51,8 @@ class Workout_controller extends Controller{
 		}
 	}
 	//add id to workout favorites
+	
+	//A function to remove a workout from favorites
 	public function removeFromFavorites(){
 		if(isset($_POST['action'])){
 			$workout = $this->model('favorite_workout');
@@ -59,12 +66,14 @@ class Workout_controller extends Controller{
 		}
 	}
 	
+	//A function to show the favorites
 	public function viewFavorites(){
 		$exercise = $this->model('favorite_workout');
 		$exercise->where('posted_id', '=', '$_SESSION[\'userID\']');
 		$results = $exercise->get();
 	}
 	
+	//A function to rate a workout
 	public function rateWorkout(){
 		if(isset($_POST['action'])){
 			$workout = $this->model('workout_rating');
@@ -83,6 +92,8 @@ class Workout_controller extends Controller{
 			$this->view('Home/main');
 		}
 	}
+	
+	//A function to view a workout
 	public function viewWorkout(){
 		$this->view('workout/display', ['workout_id'=>$_POST['workout_id']]);
 		echo $_POST['workout_id'];
