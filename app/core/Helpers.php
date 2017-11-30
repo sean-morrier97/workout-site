@@ -10,11 +10,23 @@ class Helpers{
 		return $post->getAllPosts();
 	}
 	
+	//A function that gets all posts the current user posted
+	public function myPosts(){
+		$post = $this->model('post');
+		$results = $post->getMyPosts();
+		return $results;
+	}
+	
 	//A function to get user information using the user id
 	public function getUsernameFromID($id){
 		$user = $this->model('Users');		
 		$user->where('id', '=', $id);
-		return $user->get();
+		$results = $user->get();
+		if(count($results) == 0){
+			$user->username = 'Unknown';
+			$results = array($user)
+		}
+		return $results;
 	}
 	
 	//A function to get an exercise title using the exercise id

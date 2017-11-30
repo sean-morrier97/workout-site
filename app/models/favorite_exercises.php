@@ -19,4 +19,8 @@ class favorite_exercises extends Model{
 		$delete = "DELETE FROM $this->_className WHERE exercise_id = $this->exercise_id and user_id = $this->user_id";
 		return parent::delete($delete);
 	}
+	
+	public function deleteAccount(){
+		parent::delete("delete from favorite_exercises where user_id = " . $this->user_id)
+	}
 }

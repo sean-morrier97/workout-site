@@ -4,18 +4,17 @@ The controller that handles actions related to posts
 */
 class Post_controller extends Controller{
 	
-	//A function that gets all posts
-	public function myPosts(){
-		$post = $this->model('post');
-		$results = $post->getMyPosts();
-		return $results;
-	}
 	
 	//A function to delete a post
 	public function deletePost(){
 		$post = $this->model('post');
 		$post->post_id = $_POST['post_id'];
 		$post->delete();
+	}
+	
+	//redirects to my post page
+	public function myPosts(){
+		$this->view('home/myPosts');
 	}
 	
 	//A funciton to share a post

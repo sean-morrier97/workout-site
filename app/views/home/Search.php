@@ -95,7 +95,10 @@ else if($data['resultType'] == 2){
 				'<input type="submit" class="btn btn-default" name="action" value="Create Personal Record" /> </form>
 				<form method="get" action="/Post_controller/share" class="form-horizontal">
 				<input type="hidden" name="post_id" value='. $item->exercise_id . '/>
-				<input type="submit" class="btn btn-default" name="action" value="Share" /> </form>'.
+				<input type="submit" class="btn btn-default" name="action" value="Share" /> </form>
+				<form method="get" action="/Workout_controller/addExercise" class="form-horizontal">
+				<input type="hidden" name="exercise_id" value='. $item->exercise_id . '/>
+				<input type="submit" class="btn btn-default" name="action" value="Add to workout" /> </form>'.
 				'<form method="post" action="/Exercise_controller/rateExercise" class="form-horizontal"> <input value="'. 
 					$item->exercise_id .'" type="hidden" name="exercise_id"><input value="1" type="hidden" name="rating"><input type="submit" class="btn btn-default" name="action" value="Rate 1" /> </form>'.
 					'<form method="post" action="/Exercise_controller/rateExercise" class="form-horizontal"> <input value="'. 

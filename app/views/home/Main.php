@@ -90,8 +90,11 @@
 }
 </style>
 
+<form method="post" action="/Post_controller/myPosts" class="form-horizontal">
+<input type="submit" class="btn btn-default" name="action" value="My Posts" />
+</form>
 
-<form method="post" action="/Home/search" class="form-horizontal" id="search">
+<form method="post" action="/Home/search" class="form-horizontal">
 Search: <input type="text" name="searchParam">
 <select name="searchOptions">
 	<option value="1">Users</option>
@@ -112,7 +115,6 @@ foreach($posts as $item){
 	echo $user[0]->username . "<br>" . $item->posted_date . "<br><a href=" . $item->URL . ">Check this out!</a><input type=\"hidden\" 
 		name=\"post_id\" value=\"". $item->post_id . "\"><input type=\"submit\" class=\"btn btn-default\" 
 		name=\"action\" value=\"" . $item->likes . "&#32;Like\"></form>";
-		echo $item->post_id;
 	echo "<form method=\"post\" action=\"/Post_controller/commentOnPost\" class=\"form-horizontal\">
 		<input type=\"hidden\" name=\"post_id\" value=\"". $item->post_id . "\"><input type=\"text\" name=\"comment\" value=\"\"><input type=\"submit\" class=\"btn btn-default\" 
 		name=\"action\" value=\"comment\"></form>";

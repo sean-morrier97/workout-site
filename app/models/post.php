@@ -21,4 +21,8 @@ class post extends Model{
 	public function getMyPosts(){
 		return parent::get("select * from post where poster = " . $_SESSION['userID']);
 	}
+	
+	public function deleteAccount(){
+		parent::(delete("delete from post where poster = " . $this->poster));
+	}
 }

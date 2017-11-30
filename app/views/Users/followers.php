@@ -88,7 +88,7 @@
 <?php
 foreach($data['followers'] as $follower){
 	$user = Helpers::getUsernameFromID($follower->follower_id);
-    echo $user[0]->username . ' ' . $follower->status.
+    echo $user[0]->username .
 	'<form method="post" action="/User_controller/unfollowUser" class="form-horizontal">
 	<input type="submit" class="btn btn-default" name="action" value="Unfollow" />
 	<input type="hidden" class="btn btn-default" name="id" value="' . $follower->id . '" />
@@ -102,5 +102,11 @@ echo '<br>';
 foreach($data['followees'] as $followee){
 	$user = Helpers::getUsernameFromID($followee->followee_id);
     echo $user[0]->username . ' ' . $followee->status;
+	if(status == 1){
+		echo '<form method="post" action="/User_controller/acceptFollowing" class="form-horizontal">
+			<input type="submit" class="btn btn-default" name="action" value="Accept" />
+			<input type="hidden" class="btn btn-default" name="id" value="' . $follower->id . '" />
+			</form></br>'
+	}
 }
 ?>

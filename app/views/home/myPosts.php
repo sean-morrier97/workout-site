@@ -85,12 +85,26 @@
     </script>
 My posts:
 <?php
-$posts = Post_controller::myPosts();
+$posts = Helpers::myPosts();
 foreach($posts as $item){
-	$user = User_controller::getUsernameFromID($item->poster);
-	echo "<form method=\"get\" action=\"/Post_controller/deletePost\" class=\"form-horizontal\">"
-	echo $user[0]->username . "<br><a href=" . $item->URL . ">Check this out!</a><input type=\"hidden\" 
+	$user = Helpers::getUsernameFromID($item->poster);
+	echo "<form method=\"post\" action=\"/Post_controller/likePost\" class=\"form-horizontal\">";
+	echo $user[0]->username . "<br>" . $item->posted_date . "<br><a href=" . $item->URL . ">Check this out!</a><input type=\"hidden\" 
 		name=\"post_id\" value=\"". $item->post_id . "\"><input type=\"submit\" class=\"btn btn-default\" 
-		name=\"action\" value=\"Delete\"></form>";
+		name=\"action\" value=\"" . $item->likes . "&#32;Like\"></form>
+		<form method=\"post\" action=\"/Post_controller/deletePost\"><input type=\"submit\" class=\"btn btn-default\" 
+		name=\"action\" value=\"Delete Post\"><input type=\"hidden\" 
+		name=\"post_id\" value=\"". $item->post_id . "\"></form>";
+	echo "<form method=\"post\" action=\"/Post_controller/commentOnPost\" class=\"form-horizontal\">
+		<input type=\"hidden\" name=\"post_id\" value=\"". $item->post_id . "\"><input type=\"text\" name=\"comment\" value=\"\"><input type=\"submit\" class=\"btn btn-default\" 
+		name=\"action\" value=\"comment\"></form>";
+	$comments = Helpers::getComments($item->post_id);
+	foreach($comments as $comment){
+		$user = Helpers::getUsernameFromID($comment->poster);
+		echo $user[0]->username  . "<br>" . $comment->posted_date .  
+		"<br><h5>" . $comment->content . "<h5><form method=\"post\" action=\"/Post_controller/likeComment\" 
+		class=\"form-horizontal\"><input type=\"hidden\" name=\"comment_id\" value=\"". $comment->id . "\">
+		<input type=\"submit\" class=\"btn btn-default\" name=\"action\" value=\"" . $comment->likes . "&#32;Like\"></form><br><br>";
+	}
 }
 ?>

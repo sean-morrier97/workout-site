@@ -11,4 +11,9 @@ class personal_record extends Model{
 		parent::__construct();
 	}
 	
+	
+	public function deleteAccount(){
+		parent::(delete("delete from personal_record where user_id = " . $this->user_id));
+	}
+	
 }

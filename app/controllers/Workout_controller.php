@@ -55,11 +55,13 @@ class Workout_controller extends Controller{
 	//A function to remove a workout from favorites
 	public function removeFromFavorites(){
 		if(isset($_POST['action'])){
-			$workout = $this->model('favorite_workout');
-			$workout->workout_id = $_POST['workout_id']; 
-			$workout->user_id = $_SESSION['userID'];
-			if($workout->doesExist() == null){
-				$workout->delete();
+			$favorite_workouts = $this->model('favorite_workouts');
+			$favorite_workouts->where('workout_id', '=', $_POST['workout_id']);
+			$favorite_workouts->where('user_id', '=', $_SESSION['userID']);
+			$favorite_workouts->workout_id = $_POST['workout_id']; 
+			$favorite_workouts->user_id = $_SESSION['userID'];
+			if(count($favorite_workouts->get())!=0){
+				$favorite_workouts->deleteFavorite();
 			}else{
 				//display error message
 			}

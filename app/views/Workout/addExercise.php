@@ -7,9 +7,7 @@
 <link rel="stylesheet" type="text/css" href="/css/simple-sidebar.css">
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
-</head>
-
-						
+</head>						
 <div id="wrapper">
 	<div id="sidebar-wrapper">
             <ul class="sidebar-nav">
@@ -82,16 +80,21 @@
 	document.getElementById("logout").onclick = function() {
     document.getElementById("logoutForm").submit();
 	}
-</script>
-<h1>Favorite exercises</h1>
+    </script>
+<p>Add exercise to which workout out?</p>
+<form method="post" action="/Workout_controller/addExercise" class="form-horizontal">
+Exercise: <select name="workout_id">
 <?php
-if($data['favoriteExercises']==null)
-	echo "No favorites yet";
-else{
-	foreach($data['favoriteExercises'] as $item){
-			echo $item->title . ' Average Rating: ' . $item->number_of_ratings . '<br> Posted By: ' . $item->poster_id . ' Posted on: ' . $item->posted_date . 
-					'<form method="post" action="/Exercise_controller/removeFromFavorites" class="form-horizontal"> <input value="'. $item->exercise_id .'" type="hidden" name="exercise_id">' . 
-					'<input type="submit" class="btn btn-default" name="action" value="Remove" />';
-	}
+$workouts = $this->model('workout');
+$workouts->where('poster_id', '=', $_SESSION['userId']);
+$result = $workout->get();
+foreach($result as $item){
+	echo '<option value="' . $items->workout_id . '"/>' . $items->title . '</option>';
 }
+
 ?>
+</select> 
+Sets: <input type="text" name="sets">
+Repititions: <input type="text" name="reps">
+<input type="submit" class="btn btn-default" name="action" value="Add to workout">
+</form>

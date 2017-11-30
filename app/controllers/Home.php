@@ -38,6 +38,7 @@ class Home extends Controller{
 			$this->view('Home/Search', ['searchResults'=>$results, 'resultType'=>$resultType]);
 		}
 	}
+	
 }
 ?>
 

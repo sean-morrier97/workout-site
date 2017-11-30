@@ -24,8 +24,23 @@ class User_controller extends Controller{
 	public function deleteAccount(){
 		$user = $this->model('Users');
 		$user->id = $_SESSION['userID'];
-		$user->status = deletedAccountStatus;
-		$user->update();
+		$user->delete();
+		$temp = $this->model('favorite_exercises');
+		$temp->user_id = $_SESSION['userID'];
+		$temp->deleteAccount();
+		$temp = $this->model('favorite_workouts');
+		$temp->user_id = $_SESSION['userID'];
+		$temp->deleteAccount();
+		$temp = $this->model('following');
+		$temp->follower_id = $_SESSION['userID'];
+		$temp->followee_id = $_SESSION['userID'];
+		$temp->deleteAccount();
+		$temp = $this->model('personal_record');
+		$temp->user_id = $_SESSION['userID'];
+		$temp->deleteAccount();
+		$temp = $this->model('post');
+		$temp->poster = $_SESSION['userID'];
+		$temp->deleteAccount();
 		LoginCore::logout();
 	}
 	
@@ -77,7 +92,6 @@ class User_controller extends Controller{
 	public function viewProfile(){
 		$user = $this->model('Users');
 		$result = $user->find($_POST['userID']);
-		$this->view('Users/User_info', ['user'=>$result]);
 		if($result->status == 1){
 			$following = $this->model('following');
 			$following->where('follower_id', '=', '$_SESSION[\'userID\']');
@@ -139,6 +153,13 @@ class User_controller extends Controller{
 		else{
 			$this->view('Users/personal_record', ['record_id'=>$_POST['record_id']]);
 		}
+	}
+	
+	public function acceptFollowing(){
+		$following = $this->model('following');
+		$following->id = $_POST['id'];
+		$following->status = 0;
+		$following->update();
 	}
 }
 ?>

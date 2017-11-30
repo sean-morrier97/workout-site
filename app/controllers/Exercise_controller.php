@@ -44,6 +44,8 @@ class Exercise_controller extends Controller{
 	public function removeFromFavorites(){
 		if(isset($_POST['action'])){
 			$favorite_exercises = $this->model('favorite_exercises');
+			$favorite_exercises->where('exercise_id', '=', $_POST['exercise_id']);
+			$favorite_exercises->where('user_id', '=', $_SESSION['userID']);
 			$favorite_exercises->exercise_id = $_POST['exercise_id']; 
 			$favorite_exercises->user_id = $_SESSION['userID'];
 			if(count($favorite_exercises->get())!=0){
@@ -58,8 +60,11 @@ class Exercise_controller extends Controller{
 	public function viewFavorites(){
 		$fav_exercise = $this->model('favorite_exercises');
 		$fav_exercise->user_id = $_SESSION['userID'];
-		$results = $fav_exercise->joinedGet();
-		$this->view('Exercises/fav_exercises', ['favoriteExercises'=>$results]);
+		$exerciseResults = $fav_exercise->joinedGet();
+		$fav_workout = $this->model('favorite_workouts');
+		$fav_workout->user_id = $_SESSION['userID'];
+		$workoutResults = $fav_workout->joinedGet();
+		$this->view('Home/favorites', ['favoriteExercises'=>$exerciseResults, 'favoriteWorkouts'=>$workoutResults]);
 	}
 	
 	//A function that changes the rating of an exercise
