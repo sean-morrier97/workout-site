@@ -106,7 +106,7 @@ foreach($data['followees'] as $followee){
 		echo '<form method="post" action="/User_controller/acceptFollowing" class="form-horizontal">
 			<input type="submit" class="btn btn-default" name="action" value="Accept" />
 			<input type="hidden" class="btn btn-default" name="id" value="' . $follower->id . '" />
-			</form></br>'
+			</form></br>';
 	}
 }
 ?>

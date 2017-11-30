@@ -1,3 +1,6 @@
+<!--
+A view to show a list of favorite exercises and a list of favorite workouts
+-->
 <!DOCTYPE html>
 <head>
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
@@ -85,8 +88,9 @@
 </script>
 <h1>Favorite exercises</h1>
 <?php
+//The condition that shows all the favorite exercises
 if($data['favoriteExercises']==null)
-	echo "No favorite exercises yet";
+	echo "No favorite exercises yet<br><br>";
 else{
 	foreach($data['favoriteExercises'] as $item){
 			echo $item->title . ' Average Rating: ' . $item->number_of_ratings . '<br> Posted By: ' . $item->poster_id . ' Posted on: ' . $item->posted_date . 
@@ -94,9 +98,9 @@ else{
 					'<input type="submit" class="btn btn-default" name="action" value="Remove" /></form>';
 	}
 }
-
+//The condition that shows all the favorite workouts 
 if($data['favoriteWorkouts']==null)
-	echo "No favorite exercises yet";
+	echo "No favorite workouts yet";
 else{
 	foreach($data['favoriteWorkouts'] as $item){
 			echo $item->title . ' Average Rating: ' . $item->number_of_ratings . '<br> Posted By: ' . $item->poster_id . ' Posted on: ' . $item->posted_date . 

@@ -1,3 +1,6 @@
+<!--
+The home view that lets the user to see posts and search for users, workouts and exercises by name
+-->
 <!DOCTYPE html>
 <head>
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
@@ -105,10 +108,11 @@ Search: <input type="text" name="searchParam">
 </form>
 
 <?php
-echo "http://$_SERVER[HTTP_HOST]/Workout_controller/viewWorkout?workout_id=1";
-$posts = Helpers::getPosts();
+//echo "http://$_SERVER[HTTP_HOST]/Workout_controller/viewWorkout?workout_id=1";
+$posts = Helpers::getPosts();//Calls the getPosts function
 if($posts==null);
 else{
+//The loop that outputs all the posts the user has
 foreach($posts as $item){
 	$user = Helpers::getUsernameFromID($item->poster);
 	echo "<form method=\"post\" action=\"/Post_controller/likePost\" class=\"form-horizontal\">";
@@ -119,6 +123,7 @@ foreach($posts as $item){
 		<input type=\"hidden\" name=\"post_id\" value=\"". $item->post_id . "\"><input type=\"text\" name=\"comment\" value=\"\"><input type=\"submit\" class=\"btn btn-default\" 
 		name=\"action\" value=\"comment\"></form>";
 	$comments = Helpers::getComments($item->post_id);
+	//The loop that outputs the comments related to the posts
 	foreach($comments as $comment){
 		$user = Helpers::getUsernameFromID($comment->poster);
 		echo $user[0]->username  . "<br>" . $comment->posted_date .  

@@ -65,7 +65,7 @@ class User_controller extends Controller{
 		$following->delete();	
 	}
 	
-	//
+	//A function to call the list of followers and the list of followees
 	public function followInfo(){
 		$followees = $this->listOfFollowees();
 		$followers = $this->listOfFollowers();
@@ -154,7 +154,7 @@ class User_controller extends Controller{
 			$this->view('Users/personal_record', ['record_id'=>$_POST['record_id']]);
 		}
 	}
-	
+	//A function to accept the followers 
 	public function acceptFollowing(){
 		$following = $this->model('following');
 		$following->id = $_POST['id'];

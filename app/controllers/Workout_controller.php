@@ -33,7 +33,7 @@ class Workout_controller extends Controller{
 			$this->view('Workout/addExercise', ['exercise_id'=>$_POST['exercise_id']]);
 		}
 	}
-	//remove muscle group and postition from workout_detail
+	//remove muscle group and position from workout_detail
 
 	//A function to add a workout to favorites
 	public function addToFavorites(){

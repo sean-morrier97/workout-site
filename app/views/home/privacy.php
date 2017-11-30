@@ -83,6 +83,7 @@
     document.getElementById("logoutForm").submit();
 	}
     </script>
+	
 <form action="/privacySettings" method="post">
 Privacy: <select name="privacy">
 			<option value="private">Private</option>

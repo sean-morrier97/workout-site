@@ -1,3 +1,6 @@
+<!--
+A view that displays all the search results
+-->
 <!DOCTYPE html>
 <head>
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
