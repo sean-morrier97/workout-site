@@ -104,8 +104,8 @@ The home view that lets the user to see posts and search for users, workouts and
 	}
     </script>
 
-	<div id="exampleTag"></div>
-	
+<div class = "default">
+<div class = "backgroundWhiteOverlay">
 <form method="post" action="/Home/search" class="form-horizontal" id="search">
 Search: <input type="text" name="searchParam">
 <select name="searchOptions">
@@ -115,7 +115,7 @@ Search: <input type="text" name="searchParam">
 </select>
 <input type="submit" class="btn btn-default" name="action" value="search" />
 </form>
-<h1 class="title">Posts</h1>
+<h1>Posts</h1>
 <?php
 //echo "http://$_SERVER[HTTP_HOST]/Workout_controller/viewWorkout?workout_id=1";
 $posts = Helpers::getPosts();//Calls the getPosts function
@@ -124,7 +124,7 @@ else{
 //The loop that outputs all the posts the user has
 foreach($posts as $item){
 	$user = Helpers::getUsernameFromID($item->poster);
-	echo "<div class=\"default\"><form method=\"post\" action=\"/Post_controller/likePost\" class=\"form-horizontal\">";
+	echo "<form method=\"post\" action=\"/Post_controller/likePost\" class=\"form-horizontal\">";
 	echo $user[0]->username . " on " . $item->posted_date . "<br><a href=" . $item->URL . ">Check this out!</a><br><input type=\"hidden\" 
 		name=\"post_id\" value=\"". $item->post_id . "\"><input type=\"submit\" class=\"btn btn-default\" 
 		name=\"action\" value=\"" . $item->likes . "&#32;Like\"></form>";
@@ -135,11 +135,14 @@ foreach($posts as $item){
 	//The loop that outputs the comments related to the posts
 	foreach($comments as $comment){
 		$user = Helpers::getUsernameFromID($comment->poster);
-		echo "<div class=\"comment\">" . $user[0]->username  . " on " . $comment->posted_date .  
+		echo "Comments: <br><div class=\"comment\">" . $user[0]->username  . " on " . $comment->posted_date .  
 		"<br><h5>&emsp;" . $comment->content . "<h5><form method=\"post\" action=\"/Post_controller/likeComment\" 
 		class=\"form-horizontal\"><input type=\"hidden\" name=\"comment_id\" value=\"". $comment->id . "\">
-		<input type=\"submit\" class=\"btn btn-default\" name=\"action\" value=\"" . $comment->likes . "&#32;Like\"></form><br><br></div></div>";
+		<input type=\"submit\" class=\"btn btn-default\" name=\"action\" value=\"" . $comment->likes . "&#32;Like\"></form><br><br></div>";
 	}
 }
 }
 ?>
+</div>
+</div>
+</body>

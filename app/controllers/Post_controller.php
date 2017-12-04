@@ -20,8 +20,11 @@ class Post_controller extends Controller{
 	//A function to share a post
 	public function share(){
 		$post = $this->model('post');
-		//if($_POST['type'] == 1)
-		$post->URL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+		$type = $_POST['type'];
+		if($type == 'exercise')
+			$post->URL = "http://$_SERVER[HTTP_HOST]/Workout_controller/viewPost?id=".$_POST['post_id'];
+		else
+			$post->URL = "http://$_SERVER[HTTP_HOST]/Exercise_controller/viewPost?id=".$_POST['post_id'];
 		$post->poster = $_SESSION['userID'];
 		$post->posted_date = "NOW()";
 		$post->likes = 0;

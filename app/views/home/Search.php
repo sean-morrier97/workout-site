@@ -114,8 +114,9 @@ else if($data['resultType'] == 2){
 				'<input type="submit" class="btn btn-default" name="action" value="Add To Favorites" /> </form>'.
 				'<form method="get" action="/User_controller/createPR" class="form-horizontal"> <input value="'. $item->exercise_id .'" type="hidden" name="exercise_id">' . 
 				'<input type="submit" class="btn btn-default" name="action" value="Create Personal Record" /> </form>
-				<form method="get" action="/Post_controller/share" class="form-horizontal">
+				<form method="post" action="/Post_controller/share" class="form-horizontal">
 				<input type="hidden" name="post_id" value='. $item->exercise_id . '/>
+				<input type="hidden" name="type" value="exercise"/>
 				<input type="submit" class="btn btn-default" name="action" value="Share" /> </form>
 				<form method="post" action="/Workout_controller/addExercise" class="form-horizontal">
 				<input type="hidden" name="exercise_id" value="'. $item->exercise_id . '"/>
@@ -147,8 +148,9 @@ else if($data['resultType'] == 2){
 		echo $item->title . ' Average Rating: ' . $item->average_rating. '<br> Posted by: ' . $results[0]->username . ' Posted on: ' . $item->posted_date . '<br>
 		<form method="post" action="/Workout_controller/addToFavorites" class="form-horizontal"> <input value="'. $item->workout_id .'" type="hidden" name="workout_id">' . 
 				'<input type="submit" class="btn btn-default" name="action" value="Add To Favorites" /> </form>
-				<form method="get" action="/Post_controller/share" class="form-horizontal">
+				<form method="post" action="/Post_controller/share" class="form-horizontal">
 				<input type="hidden" name="post_id" value='. $item->workout_id . '/>
+				<input type="hidden" name="type" value="workout"/>
 				<input type="submit" class="btn btn-default" name="action" value="Share" /> </form>
 				<form method="post" action="/Workout_controller/rateWorkout" class="form-horizontal"> <input value="'. 
 					$item->workout_id .'" type="hidden" name="workout_id"><input value="1" type="hidden" name="rating"><input type="submit" name="action" value="Rate 1" /> </form>'.

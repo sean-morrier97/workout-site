@@ -24,6 +24,12 @@ class Workout_controller extends Controller{
 		}
     }
 	
+	public function viewPost(){
+		$workout = $this->model("workout");
+		$workout->where('workout_id', '=', substr($_GET['id'],0,1));
+		$result = $workout->get();
+		var_dump($result);
+	}
 	//A function to add an exercise to a workout
 	public function addExercisePost(){
 		$workoutDetail = $this->model('workout_detail');

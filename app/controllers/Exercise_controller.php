@@ -35,6 +35,13 @@ class Exercise_controller extends Controller{
 		}
     }
 	
+	public function viewPost(){
+		$workout = $this->model("exercise");
+		$workout->where('exercise_id', '=', substr($_GET['id'],0,1));
+		$result = $workout->get();
+		var_dump($result);
+	}
+	
 	//A function that performs an action of adding an exercise to favorites
 	public function addToFavorites(){
 		if(isset($_POST['action'])){

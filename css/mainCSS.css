@@ -1,5 +1,5 @@
 #search{
-	margin-left: 600px;
+	margin-left: 300px;
 }
 
 .default{
@@ -12,4 +12,15 @@
 
 .comment{
 	padding-left: 50px;
+}
+
+body{
+	background: #ADD8E6;
+}
+
+.backgroundWhiteOverlay{
+	padding-top: 25px;
+	padding-left: 30px;
+    background: rgba(255,255,255,0.95);
+    width: 80%;
 }
