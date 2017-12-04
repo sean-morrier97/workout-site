@@ -103,6 +103,7 @@ A view that displays all the followers and followees
     document.getElementById("logoutForm").submit();
 	}
     </script>
+	<div class="default">
 <h2>Followees:</h2>
 
 <?php
@@ -117,6 +118,7 @@ foreach($data['followers'] as $follower){
 }
 echo '<br>';
 ?>
+
 <h2>Followers:</h2>
 
 <?php
@@ -132,3 +134,4 @@ foreach($data['followees'] as $followee){
 	}
 }
 ?>
+</div>

@@ -103,7 +103,8 @@ A view that outputs the user's posts
     document.getElementById("logoutForm").submit();
 	}
     </script>
-My posts:
+	<div class="default">
+<h1>My posts:</h1>
 <?php
 $posts = Helpers::myPosts();//Calls myPosts function
 //The loop that outputs the posts
@@ -130,3 +131,4 @@ foreach($posts as $item){
 	}
 }
 ?>
+</div>

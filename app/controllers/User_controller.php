@@ -56,6 +56,7 @@ class User_controller extends Controller{
 			$user->status = 0;
 		}
 		$user->insert();
+		$this->view("Home/Main");
 	}
 	
 	//A function to unfollow a user
@@ -128,7 +129,7 @@ class User_controller extends Controller{
 			$record->record_id = 0;
 			$record->record = $_POST['record'];
 			$record->insert();
-			
+			$this->view('Home/Main');
 		}
 		else{
 			$this->view('Users/createRecord', ['exercise_id'=>$_POST['exercise_id']]);

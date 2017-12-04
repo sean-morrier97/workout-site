@@ -103,6 +103,8 @@ A view that displays the user's settings
     document.getElementById("logoutForm").submit();
 	}
     </script>
+	<div class="default">
+	<h1>Settings</h1>
 <!--
 The form to set the user's privacy
 -->
@@ -119,3 +121,4 @@ A button to delete an account
 <form method="post" action="/User_controller/deleteAccount" class="form-horizontal">
 <input type="submit" class="btn btn-default" name="action" value="Delete Account" />
 </form>
+</div>

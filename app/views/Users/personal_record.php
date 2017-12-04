@@ -103,6 +103,7 @@ A view that displays the personal records
     document.getElementById("logoutForm").submit();
 	}
     </script>
+	<div class="default">
 <h1>Personal Records</h1><br>
 <form method="get" action="/User_controller/createPR" class="form-horizontal">
 <input type="submit" class="btn btn-default" name="action" value="Create Personal Record" /><br>
@@ -124,3 +125,4 @@ else{
 	}
 }
 ?>
+</div>

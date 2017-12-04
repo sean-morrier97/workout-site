@@ -103,6 +103,7 @@ A view that displays user's information
     document.getElementById("logoutForm").submit();
 	}
     </script>
+<div class="default">
 <h1>User Information:</h1>
 <?php
 $user = $data['user'];
@@ -120,3 +121,4 @@ echo "<input type=\"hidden\" class=\"btn btn-default\" name=\"user_id\" value=\"
 echo "<input type=\"hidden\" class=\"btn btn-default\" name=\"status\" value=\"" . $user->privacy_setting ."\" />";
 echo "</form>";
 ?>
+</div>

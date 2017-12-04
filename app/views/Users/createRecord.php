@@ -103,6 +103,8 @@ A view that displays a form to create a personal record
     document.getElementById("logoutForm").submit();
 	}
     </script>
+	<div class="default">
+	<h1>Create a Personal Record</h1>
 <form method="post" action="/User_controller/createPR" class="form-horizontal">
 Exercise: <select name="exercises">
 <?php
@@ -115,4 +117,4 @@ foreach($results as $items){
 </select><br>
 Record: <input type="text" name="record"><br>
 <input type="submit" class="btn btn-default" name="action" value="Create a record">
-</form>
+</form></div>

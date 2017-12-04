@@ -101,6 +101,7 @@ A view that displays all the search results
     document.getElementById("logoutForm").submit();
 	}
     </script>
+	<div class="default">
 <?php
 //A condition that decides what the user searches by 
 if($data['searchResults']==null);
@@ -165,3 +166,4 @@ else if($data['resultType'] == 2){
 	}
 }
 ?>
+</div>
