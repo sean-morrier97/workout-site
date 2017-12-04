@@ -62,7 +62,8 @@ class User_controller extends Controller{
 	public function unfollowUser(){
 		$following = $this->model('following');
 		$following->ID = $_POST['id'];
-		$following->delete();	
+		$following->delete();
+		$this->view("/Home/Main");
 	}
 	
 	//A function to call the list of followers and the list of followees

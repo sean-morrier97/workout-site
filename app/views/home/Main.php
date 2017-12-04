@@ -10,6 +10,7 @@ The home view that lets the user to see posts and search for users, workouts and
 <link rel="stylesheet" type="text/css" href="/css/simple-sidebar.css">
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/mainCSS.css">
 </head>
 
 						
@@ -21,6 +22,16 @@ The home view that lets the user to see posts and search for users, workouts and
 						<a id = "home" type="submit" name="action" />Home</a>
 					</li>
 				</form>	
+				<form id="postForm" method="post" action="/Post_controller/myPosts">
+					<li class="sidebar-brand">
+						<a id = "posts" type="submit" name="action" />My Posts</a>
+					</li>
+				</form>
+				<form id="exerciseForm" method="get" action="/Exercise_controller/createExercise">
+					<li class="sidebar-brand">
+						<a id = "exercise" type="submit" name="action" />Create Exercise</a>
+					</li>
+				</form>
                 <form id="favoritesForm" method="post" action="/Exercise_controller/viewFavorites">
 					<li class="sidebar-brand">
 						<a id = "favorites" name="action" />Favorites</a>
@@ -55,7 +66,7 @@ The home view that lets the user to see posts and search for users, workouts and
         </div>
 		<div>
             <div class="container-fluid">
-                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Gainz</a>
+                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle"><h2>proworkout.com</h2></a>
             </div>
         </div>
 	</div>
@@ -66,6 +77,12 @@ The home view that lets the user to see posts and search for users, workouts and
     });
 	document.getElementById("favorites").onclick = function() {
     document.getElementById("favoritesForm").submit();
+	}
+	document.getElementById("posts").onclick = function() {
+    document.getElementById("postForm").submit();
+	}
+	document.getElementById("exercise").onclick = function() {
+    document.getElementById("exerciseForm").submit();
 	}
 	document.getElementById("settings").onclick = function() {
     document.getElementById("settingsForm").submit();
@@ -87,22 +104,9 @@ The home view that lets the user to see posts and search for users, workouts and
 	}
     </script>
 
-<style>
-#search{
-	margin-left: 600px;
-}
-</style>
-
-<form method="post" action="/Post_controller/myPosts" class="form-horizontal">
-<input type="submit" class="btn btn-default" name="action" value="My Posts" />
-</form>
-
-<form method="get" action="/Exercise_controller/createExercise" class="form-horizontal">
-<input type="submit" class="btn btn-default" name="action" value="Create Exercise" />
-</form>
-
-
-<form method="post" action="/Home/search" class="form-horizontal">
+	<div id="exampleTag"></div>
+	
+<form method="post" action="/Home/search" class="form-horizontal" id="search">
 Search: <input type="text" name="searchParam">
 <select name="searchOptions">
 	<option value="1">Users</option>
@@ -111,7 +115,7 @@ Search: <input type="text" name="searchParam">
 </select>
 <input type="submit" class="btn btn-default" name="action" value="search" />
 </form>
-
+<h1 class="title">Posts</h1>
 <?php
 //echo "http://$_SERVER[HTTP_HOST]/Workout_controller/viewWorkout?workout_id=1";
 $posts = Helpers::getPosts();//Calls the getPosts function
@@ -120,8 +124,8 @@ else{
 //The loop that outputs all the posts the user has
 foreach($posts as $item){
 	$user = Helpers::getUsernameFromID($item->poster);
-	echo "<form method=\"post\" action=\"/Post_controller/likePost\" class=\"form-horizontal\">";
-	echo $user[0]->username . "<br>" . $item->posted_date . "<br><a href=" . $item->URL . ">Check this out!</a><input type=\"hidden\" 
+	echo "<div class=\"default\"><form method=\"post\" action=\"/Post_controller/likePost\" class=\"form-horizontal\">";
+	echo $user[0]->username . " on " . $item->posted_date . "<br><a href=" . $item->URL . ">Check this out!</a><br><input type=\"hidden\" 
 		name=\"post_id\" value=\"". $item->post_id . "\"><input type=\"submit\" class=\"btn btn-default\" 
 		name=\"action\" value=\"" . $item->likes . "&#32;Like\"></form>";
 	echo "<form method=\"post\" action=\"/Post_controller/commentOnPost\" class=\"form-horizontal\">
@@ -131,10 +135,10 @@ foreach($posts as $item){
 	//The loop that outputs the comments related to the posts
 	foreach($comments as $comment){
 		$user = Helpers::getUsernameFromID($comment->poster);
-		echo $user[0]->username  . "<br>" . $comment->posted_date .  
-		"<br><h5>" . $comment->content . "<h5><form method=\"post\" action=\"/Post_controller/likeComment\" 
+		echo "<div class=\"comment\">" . $user[0]->username  . " on " . $comment->posted_date .  
+		"<br><h5>&emsp;" . $comment->content . "<h5><form method=\"post\" action=\"/Post_controller/likeComment\" 
 		class=\"form-horizontal\"><input type=\"hidden\" name=\"comment_id\" value=\"". $comment->id . "\">
-		<input type=\"submit\" class=\"btn btn-default\" name=\"action\" value=\"" . $comment->likes . "&#32;Like\"></form><br><br>";
+		<input type=\"submit\" class=\"btn btn-default\" name=\"action\" value=\"" . $comment->likes . "&#32;Like\"></form><br><br></div></div>";
 	}
 }
 }
