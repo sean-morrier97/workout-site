@@ -103,7 +103,10 @@ A view to show a list of favorite exercises and a list of favorite workouts
     document.getElementById("logoutForm").submit();
 	}
     </script>
+<<<<<<< HEAD
 	<div class="default">
+=======
+>>>>>>> a02e1ad3b4360f09a932a3a00ecd8db05f9020e0
 <h1>Favorite exercises</h1>
 <?php
 //The condition that shows all the favorite exercises
