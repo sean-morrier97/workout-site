@@ -15,7 +15,7 @@ Password: <input type="password" name="password"><br>
 <input type="submit" value="Login" name="action">
 </form>
 <!--
-Sumbit button
+Submit button
 -->
 <form action="/Login/signup" method="post">
 <input type="submit" value="Register" name="action">

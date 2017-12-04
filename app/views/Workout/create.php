@@ -10,6 +10,7 @@ A view that displays a form to create a new workout
 <link rel="stylesheet" type="text/css" href="/css/simple-sidebar.css">
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/mainCSS.css">
 </head>
 
 						
@@ -21,6 +22,16 @@ A view that displays a form to create a new workout
 						<a id = "home" type="submit" name="action" />Home</a>
 					</li>
 				</form>	
+				<form id="postForm" method="post" action="/Post_controller/myPosts">
+					<li class="sidebar-brand">
+						<a id = "posts" type="submit" name="action" />My Posts</a>
+					</li>
+				</form>
+				<form id="exerciseForm" method="get" action="/Exercise_controller/createExercise">
+					<li class="sidebar-brand">
+						<a id = "exercise" type="submit" name="action" />Create Exercise</a>
+					</li>
+				</form>
                 <form id="favoritesForm" method="post" action="/Exercise_controller/viewFavorites">
 					<li class="sidebar-brand">
 						<a id = "favorites" name="action" />Favorites</a>
@@ -55,7 +66,7 @@ A view that displays a form to create a new workout
         </div>
 		<div>
             <div class="container-fluid">
-                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Gainz</a>
+                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle"><h2>proworkout.com</h2></a>
             </div>
         </div>
 	</div>
@@ -66,6 +77,12 @@ A view that displays a form to create a new workout
     });
 	document.getElementById("favorites").onclick = function() {
     document.getElementById("favoritesForm").submit();
+	}
+	document.getElementById("posts").onclick = function() {
+    document.getElementById("postForm").submit();
+	}
+	document.getElementById("exercise").onclick = function() {
+    document.getElementById("exerciseForm").submit();
 	}
 	document.getElementById("settings").onclick = function() {
     document.getElementById("settingsForm").submit();
@@ -85,9 +102,12 @@ A view that displays a form to create a new workout
 	document.getElementById("logout").onclick = function() {
     document.getElementById("logoutForm").submit();
 	}
-</script>
+    </script>
+	<div class="default">
+	<h1>Create a Workout</h1>
 <form method="post" action="/Workout_controller/createWorkout" class="form-horizontal">
 Title: <input type="text" name="title"><br>
 <input type="submit" class="btn btn-default" name="action" value="Create" />
 </form>
 <p>Tip: you can add exercises by searching them and then clicking "Add to workout"</p>
+</div>
