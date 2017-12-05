@@ -103,13 +103,12 @@ A view that creates a form to create an exercise
     document.getElementById("logoutForm").submit();
 	}
     </script>
-<<<<<<< HEAD
 	<div class="default">
+	<div class="backgroundWhiteOverlay">
 	<h1>Create an Exercise</h1>
 <form method="post" action="/Exercise_controller/createExercise" class="form-horizontal">
-=======
+
 <div class="default"><form method="post" action="/Exercise_controller/createExercise" class="form-horizontal">
->>>>>>> a02e1ad3b4360f09a932a3a00ecd8db05f9020e0
 Title: <input type="text" name="title"><br>
 Main Muscle: <select name="mainMuscle">		  
 <?php
@@ -141,9 +140,5 @@ foreach($results as $item ){
 ?>
 </select><br>
 <input type="submit" class="btn btn-default" name="action" value="Create" />
-<<<<<<< HEAD
 </form>
-</div>
-=======
-</form></div>
->>>>>>> a02e1ad3b4360f09a932a3a00ecd8db05f9020e0
+</div></div><br>

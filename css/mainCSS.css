@@ -20,6 +20,7 @@ body{
 
 .backgroundWhiteOverlay{
 	padding-top: 25px;
+	padding-bottom: 25px;
 	padding-left: 30px;
     background: rgba(255,255,255,0.95);
     width: 80%;

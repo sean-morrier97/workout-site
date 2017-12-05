@@ -104,11 +104,12 @@ A view that displays user's information
 	}
     </script>
 <div class="default">
+<div class="backgroundWhiteOverlay">
 <h1>User Information:</h1>
 <?php
 $user = $data['user'];
 //A condition that decides to perform an action depending on user's privacy
-if($user != null){
+if($user->username != null){
 	echo "Username: " .$user->username. "<br>";
 	echo "Email: " . $user->email . "<br>";
 	echo "Date of Birth: " . $user->dob . "<br>";
@@ -117,8 +118,9 @@ if($user != null){
 }
 echo "<form method=\"post\" action=\"/User_controller/followUser\" class=\"form-horizontal\">";
 echo "<input type=\"submit\" class=\"btn btn-default\" name=\"action\" value=\"Follow\" />";
-echo "<input type=\"hidden\" class=\"btn btn-default\" name=\"user_id\" value=\"" . $user->id ."\" />";
-echo "<input type=\"hidden\" class=\"btn btn-default\" name=\"status\" value=\"" . $user->privacy_setting ."\" />";
+echo "<input type=\"hidden\" name=\"user_id\" value=\"" . $user->id ."\" />";
+echo "<input type=\"hidden\" name=\"privacy_setting\" value=\"" . $user->privacy_setting ."\" />";
 echo "</form>";
 ?>
+</div>
 </div>

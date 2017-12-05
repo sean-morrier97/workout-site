@@ -104,12 +104,13 @@ A view that displays all the followers and followees
 	}
     </script>
 	<div class="default">
+	<div class="backgroundWhiteOverlay">
 <h2>Followees:</h2>
 
 <?php
 //The loop to display the followees
-foreach($data['followers'] as $follower){
-	$user = Helpers::getUsernameFromID($follower->follower_id);//Calls getUsernameFromID function
+foreach($data['followees'] as $follower){
+	$user = Helpers::getUsernameFromID($follower->followee_id);//Calls getUsernameFromID function
     echo $user[0]->username .
 	'<form method="post" action="/User_controller/unfollowUser" class="form-horizontal">
 	<input type="submit" class="btn btn-default" name="action" value="Unfollow" />
@@ -123,15 +124,16 @@ echo '<br>';
 
 <?php
 //The loop to display the followers
-foreach($data['followees'] as $followee){
-	$user = Helpers::getUsernameFromID($followee->followee_id);//Calls getUsernameFromID function
-    echo $user[0]->username . ' ' . $followee->status;
-	if(status == 1){
+foreach($data['followers'] as $followee){
+	$user = Helpers::getUsernameFromID($followee->follower_id);//Calls getUsernameFromID function
+    echo $user[0]->username . ' ';
+	if($followee->status == 1){
 		echo '<form method="post" action="/User_controller/acceptFollowing" class="form-horizontal">
 			<input type="submit" class="btn btn-default" name="action" value="Accept" />
-			<input type="hidden" class="btn btn-default" name="id" value="' . $follower->id . '" />
+			<input type="hidden" class="btn btn-default" name="id" value="' . $followee->id . '" />
 			</form></br>';
 	}
 }
 ?>
+</div>
 </div>

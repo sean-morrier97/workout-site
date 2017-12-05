@@ -104,6 +104,7 @@ A view that displays a form to create a personal record
 	}
     </script>
 	<div class="default">
+	<div class="backgroundWhiteOverlay">
 	<h1>Create a Personal Record</h1>
 <form method="post" action="/User_controller/createPR" class="form-horizontal">
 Exercise: <select name="exercises">
@@ -118,3 +119,4 @@ foreach($results as $items){
 Record: <input type="text" name="record"><br>
 <input type="submit" class="btn btn-default" name="action" value="Create a record">
 </form></div>
+</div>

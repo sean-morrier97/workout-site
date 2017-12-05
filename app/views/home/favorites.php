@@ -103,31 +103,32 @@ A view to show a list of favorite exercises and a list of favorite workouts
     document.getElementById("logoutForm").submit();
 	}
     </script>
-<<<<<<< HEAD
 	<div class="default">
-=======
->>>>>>> a02e1ad3b4360f09a932a3a00ecd8db05f9020e0
-<h1>Favorite exercises</h1>
+	<div class="backgroundWhiteOverlay">
+<h1>Favorite exercises:</h1>
 <?php
 //The condition that shows all the favorite exercises
 if($data['favoriteExercises']==null)
-	echo "No favorite exercises yet<br><br>";
+	echo "No favorite Exercises yet<br><br>";
 else{
 	foreach($data['favoriteExercises'] as $item){
-			echo $item->title . ' Average Rating: ' . $item->number_of_ratings . '<br> Posted By: ' . $item->poster_id . ' Posted on: ' . $item->posted_date . 
-					'<form method="post" action="/Exercise_controller/removeFromFavorites" class="form-horizontal"> <input value="'. $item->exercise_id .'" type="hidden" name="exercise_id">' . 
-					'<input type="submit" class="btn btn-default" name="action" value="Remove" /></form>';
+		$user = Helpers::getUsernameFromID($item->poster_id);
+		echo $item->title . ' Average Rating: ' . $item->number_of_ratings . '<br> Posted By: ' . $user[0]->username . ' <br>Posted on: ' . $item->posted_date . 
+				'<form method="post" action="/Exercise_controller/removeFromFavorites" class="form-horizontal"> <input value="'. $item->exercise_id .'" type="hidden" name="exercise_id">' . 
+				'<input type="submit" class="btn btn-default" name="action" value="Remove" /></form>';
 	}
 }
-//The condition that shows all the favorite workouts 
+echo "<h1>Favorite Workouts:</h1>";
 if($data['favoriteWorkouts']==null)
 	echo "No favorite workouts yet";
 else{
 	foreach($data['favoriteWorkouts'] as $item){
-			echo $item->title . ' Average Rating: ' . $item->number_of_ratings . '<br> Posted By: ' . $item->poster_id . ' Posted on: ' . $item->posted_date . 
-					'<form method="post" action="/Workout_controller/removeFromFavorites" class="form-horizontal"> <input value="'. $item->workout_id .'" type="hidden" name="workout_id">' . 
-					'<input type="submit" class="btn btn-default" name="action" value="Remove" /></form>';
+		$user = Helpers::getUsernameFromID($item->poster_id);
+		echo $item->title . ' Average Rating: ' . $item->number_of_ratings . '<br> Posted By: ' . $user[0]->username . ' <br>Posted on: ' . $item->posted_date . 
+				'<form method="post" action="/Workout_controller/removeFromFavorites" class="form-horizontal"> <input value="'. $item->workout_id .'" type="hidden" name="workout_id">' . 
+				'<input type="submit" class="btn btn-default" name="action" value="Remove" /></form>';
 	}
 }
 ?>
+</div>
 </div>

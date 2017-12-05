@@ -10,6 +10,7 @@ class Post_controller extends Controller{
 		$post = $this->model('post');
 		$post->post_id = $_POST['post_id'];
 		$post->delete();
+		$this->view('Home/Main');
 	}
 	
 	//redirects to my post page

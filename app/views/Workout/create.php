@@ -104,13 +104,12 @@ A view that displays a form to create a new workout
 	}
     </script>
 	<div class="default">
-<<<<<<< HEAD
+	<div class="backgroundWhiteOverlay">
 	<h1>Create a Workout</h1>
-=======
->>>>>>> a02e1ad3b4360f09a932a3a00ecd8db05f9020e0
 <form method="post" action="/Workout_controller/createWorkout" class="form-horizontal">
 Title: <input type="text" name="title"><br>
 <input type="submit" class="btn btn-default" name="action" value="Create" />
 </form>
 <p>Tip: you can add exercises by searching them and then clicking "Add to workout"</p>
+</div>
 </div>

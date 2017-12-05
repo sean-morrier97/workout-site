@@ -104,6 +104,7 @@ A view that outputs the user's posts
 	}
     </script>
 	<div class="default">
+	<div class="backgroundWhiteOverlay">
 <h1>My posts:</h1>
 <?php
 $posts = Helpers::myPosts();//Calls myPosts function
@@ -111,15 +112,14 @@ $posts = Helpers::myPosts();//Calls myPosts function
 foreach($posts as $item){
 	$user = Helpers::getUsernameFromID($item->poster);//Calls getUsernameFromID function
 	echo "<form method=\"post\" action=\"/Post_controller/likePost\" class=\"form-horizontal\">";
-	echo $user[0]->username . "<br>" . $item->posted_date . "<br><a href=" . $item->URL . ">Check this out!</a><input type=\"hidden\" 
-		name=\"post_id\" value=\"". $item->post_id . "\"><input type=\"submit\" class=\"btn btn-default\" 
-		name=\"action\" value=\"" . $item->likes . "&#32;Like\"></form>
-		<form method=\"post\" action=\"/Post_controller/deletePost\"><input type=\"submit\" class=\"btn btn-default\" 
+	echo $user[0]->username . " on " . $item->posted_date . " <form method=\"post\" action=\"/Post_controller/deletePost\"><input type=\"submit\" class=\"btn btn-default\" 
 		name=\"action\" value=\"Delete Post\"><input type=\"hidden\" 
-		name=\"post_id\" value=\"". $item->post_id . "\"></form>";
+		name=\"post_id\" value=\"". $item->post_id . "\"></form><a href=" . $item->URL . ">Check this out!</a><br><input type=\"hidden\" 
+		name=\"post_id\" value=\"". $item->post_id . "\"><input type=\"submit\" class=\"btn btn-default\" 
+		name=\"action\" value=\"" . $item->likes . "&#32;Like\"></form>";
 	echo "<form method=\"post\" action=\"/Post_controller/commentOnPost\" class=\"form-horizontal\">
 		<input type=\"hidden\" name=\"post_id\" value=\"". $item->post_id . "\"><input type=\"text\" name=\"comment\" value=\"\"><input type=\"submit\" class=\"btn btn-default\" 
-		name=\"action\" value=\"comment\"></form>";
+		name=\"action\" value=\"comment\"></form><br><br>";
 	$comments = Helpers::getComments($item->post_id);//Calls getComments function
 	//The loop to show the post comments
 	foreach($comments as $comment){
@@ -131,4 +131,5 @@ foreach($posts as $item){
 	}
 }
 ?>
+</div>
 </div>

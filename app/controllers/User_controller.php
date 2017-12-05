@@ -46,16 +46,19 @@ class User_controller extends Controller{
 	
 	//A function to follow a user
 	public function followUser(){
-		$user = $this->model('following');
-		$user->id = 0;
-		$user->followee_id = $_SESSION['userID'];
-		$user->follower_id = $_POST['user_id'];
-		if($_POST['status'] == 1)
-			$user->status = 1;
+		$following = $this->model('following');
+		$following->id = 0;
+		$following->followee_id = $_SESSION['userID'];
+		$following->where("followee_id", "=", $_SESSION['userID']);
+		$following->follower_id = $_POST['user_id'];
+		$following->where("follower_id", "=",$_POST['user_id']);
+		if($_POST['privacy_setting'] == 1)
+			$following->status = 1;
 		else{
-			$user->status = 0;
+			$following->status = 0;
 		}
-		$user->insert();
+		if(count($following->get())==0)
+			$following->insert();
 		$this->view("Home/Main");
 	}
 	
@@ -94,16 +97,24 @@ class User_controller extends Controller{
 	public function viewProfile(){
 		$user = $this->model('Users');
 		$result = $user->find($_POST['userID']);
-		if($result->status == 1){
+		if($result->privacy_setting == 1){
 			$following = $this->model('following');
 			$following->where('follower_id', '=', '$_SESSION[\'userID\']');
 			$following->where('followee_id', '=', '$_POST[\'userID\']');
 			$followingResult = $following->get();
 			if(count($followingResult) == 0){
-				$this->view('Users/User_info', ['user'=>null]);				
+				$toReturn = $this->model('Users');
+				$toReturn->id = $result->id;
+				$toReturn->privacy_setting = $result->privacy_setting;
+				$this->view('Users/User_info', ['user'=>$toReturn]);	
 			}else{
-				if($followingResult[1]->status == 1)
-					$this->view('Users/User_info', ['user'=>null]);	
+				if($followingResult[1]->status == 1){
+					$toReturn = $this->model('Users');
+					$toReturn->id = $result->id;
+					$toReturn->privacy_setting = $result->privacy_setting;
+					$this->view('Users/User_info', ['user'=>$toReturn]);	
+					echo $result->privacy_setting;
+				}
 				else
 					$this->view('Users/User_info', ['user'=>$result]);	
 			}
@@ -162,6 +173,7 @@ class User_controller extends Controller{
 		$following->id = $_POST['id'];
 		$following->status = 0;
 		$following->update();
+		$this->view('Home/Main');
 	}
 }
 ?>

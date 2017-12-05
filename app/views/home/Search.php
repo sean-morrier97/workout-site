@@ -102,6 +102,7 @@ A view that displays all the search results
 	}
     </script>
 	<div class="default">
+	<div class="backgroundWhiteOverlay">
 <?php
 //A condition that decides what the user searches by 
 if($data['searchResults']==null);
@@ -122,15 +123,15 @@ else if($data['resultType'] == 2){
 				<form method="post" action="/Workout_controller/addExercise" class="form-horizontal">
 				<input type="hidden" name="exercise_id" value="'. $item->exercise_id . '"/>
 				<input type="submit" class="btn btn-default" name="action" value="Add to workout" /> </form>'.
-				'<form method="post" action="/Exercise_controller/rateExercise" class="form-horizontal"> <input value="'. 
+				'<form method="post" action="/Exercise_controller/rateExercise" > <input value="'. 
 					$item->exercise_id .'" type="hidden" name="exercise_id"><input value="1" type="hidden" name="rating"><input type="submit" class="btn btn-default" name="action" value="Rate 1" /> </form>'.
-					'<form method="post" action="/Exercise_controller/rateExercise" class="form-horizontal"> <input value="'. 
+					'<form method="post" action="/Exercise_controller/rateExercise" > <input value="'. 
 					$item->exercise_id .'" type="hidden" name="exercise_id"><input value="2" type="hidden" name="rating"><input type="submit" class="btn btn-default" name="action" value="Rate 2" /> </form>'.
-					'<form method="post" action="/Exercise_controller/rateExercise" class="form-horizontal"> <input value="'. 
+					'<form method="post" action="/Exercise_controller/rateExercise" > <input value="'. 
 					$item->exercise_id .'" type="hidden" name="exercise_id"><input value="3" type="hidden" name="rating"><input type="submit" class="btn btn-default" name="action" value="Rate 3" /> </form>'.
-					'<form method="post" action="/Exercise_controller/rateExercise" class="form-horizontal"> <input value="'. 
+					'<form method="post" action="/Exercise_controller/rateExercise" > <input value="'. 
 					$item->exercise_id .'" type="hidden" name="exercise_id"><input value="4" type="hidden" name="rating"><input type="submit" class="btn btn-default" name="action" value="Rate 4" /> </form>'.
-					'<form method="post" action="/Exercise_controller/rateExercise" class="form-horizontal"> <input value="'. 
+					'<form method="post" action="/Exercise_controller/rateExercise" > <input value="'. 
 					$item->exercise_id .'" type="hidden" name="exercise_id"><input value="5" type="hidden" name="rating"><input type="submit" class="btn btn-default" name="action" value="Rate 5" /> </form><br><br>';
 	}
 }else if($data['resultType'] == 1){
@@ -153,17 +154,18 @@ else if($data['resultType'] == 2){
 				<input type="hidden" name="post_id" value='. $item->workout_id . '/>
 				<input type="hidden" name="type" value="workout"/>
 				<input type="submit" class="btn btn-default" name="action" value="Share" /> </form>
-				<form method="post" action="/Workout_controller/rateWorkout" class="form-horizontal"> <input value="'. 
-					$item->workout_id .'" type="hidden" name="workout_id"><input value="1" type="hidden" name="rating"><input type="submit" name="action" value="Rate 1" /> </form>'.
-					'<form method="post" action="/Workout_controller/rateWorkout" class="form-horizontal"> <input value="'. 
-					$item->workout_id .'" type="hidden" name="workout_id"><input value="2" type="hidden" name="rating"><input type="submit" name="action" value="Rate 2" /> </form>'.
-					'<form method="post" action="/Workout_controller/rateWorkout" class="form-horizontal"> <input value="'. 
-					$item->workout_id .'" type="hidden" name="workout_id"><input value="3" type="hidden" name="rating"><input type="submit" name="action" value="Rate 3" /> </form>'.
-					'<form method="post" action="/Workout_controller/rateWorkout" class="form-horizontal"> <input value="'. 
-					$item->workout_id .'" type="hidden" name="workout_id"><input value="4" type="hidden" name="rating"><input type="submit" name="action" value="Rate 4" /> </form>'.
-					'<form method="post" action="/Workout_controller/rateWorkout" class="form-horizontal"> <input value="'. 
-					$item->workout_id .'" type="hidden" name="workout_id"><input value="5" type="hidden" name="rating"><input type="submit" name="action" value="Rate 5" /> </form><br><br>';
+				<form method="post" action="/Workout_controller/rateWorkout" > <input value="'. 
+					$item->workout_id .'" type="hidden" name="workout_id"><input value="1" type="hidden" name="rating"><input type="submit" class="btn btn-default" name="action" value="Rate 1" /> </form>'.
+					'<form method="post" action="/Workout_controller/rateWorkout" > <input value="'. 
+					$item->workout_id .'" type="hidden" name="workout_id"><input value="2" type="hidden" name="rating"><input type="submit" class="btn btn-default" name="action" value="Rate 2" /> </form>'.
+					'<form method="post" action="/Workout_controller/rateWorkout" > <input value="'. 
+					$item->workout_id .'" type="hidden" name="workout_id"><input value="3" type="hidden" name="rating"><input type="submit" class="btn btn-default" name="action" value="Rate 3" /> </form>'.
+					'<form method="post" action="/Workout_controller/rateWorkout" > <input value="'. 
+					$item->workout_id .'" type="hidden" name="workout_id"><input value="4" type="hidden" name="rating"><input type="submit" class="btn btn-default" name="action" value="Rate 4" /> </form>'.
+					'<form method="post" action="/Workout_controller/rateWorkout" > <input value="'. 
+					$item->workout_id .'" type="hidden" name="workout_id"><input value="5" type="hidden" name="rating"><input type="submit" class="btn btn-default" name="action" value="Rate 5" /> </form><br><br>';
 	}
 }
 ?>
+</div>
 </div>

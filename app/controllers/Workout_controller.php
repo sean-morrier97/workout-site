@@ -51,8 +51,10 @@ class Workout_controller extends Controller{
 		if(isset($_POST['action'])){
 			$workout = $this->model('favorite_workouts');
 			$workout->workout_id = $_POST['workout_id'];
+			$workout->where("workout_id", "=", $_POST['workout_id']);
 			$workout->id = 0; 
 			$workout->user_id = $_SESSION['userID'];
+			$workout->where("user_id", "=", $_SESSION['userID']);
 			if(count($workout->get())==0){
 				$workout->insert();
 			}

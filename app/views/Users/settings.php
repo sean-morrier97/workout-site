@@ -104,10 +104,12 @@ A view that displays the user's settings
 	}
     </script>
 	<div class="default">
+	<div class="backgroundWhiteOverlay">
 	<h1>Settings</h1>
 <!--
 The form to set the user's privacy
 -->
+<h3>Privacy: </h3>
 <form method="post" action="/User_controller/setAccountPrivacy" class="form-horizontal">
 <select name="pSettings">
 	<option value="1">Private</option>
@@ -115,10 +117,12 @@ The form to set the user's privacy
 </select>
 <input type="submit" class="btn btn-default" name="action" value="Update" />
 </form>
+<br>
 <!--
 A button to delete an account
 -->
 <form method="post" action="/User_controller/deleteAccount" class="form-horizontal">
 <input type="submit" class="btn btn-default" name="action" value="Delete Account" />
 </form>
+</div>
 </div>
