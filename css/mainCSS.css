@@ -16,11 +16,12 @@
 
 body{
 	background: #ADD8E6;
+	overflow-y: hidden;
 }
 
 .backgroundWhiteOverlay{
 	padding-top: 25px;
-	padding-bottom: 25px;
+	padding-bottom: 100%;
 	padding-left: 30px;
     background: rgba(255,255,255,0.95);
     width: 80%;
