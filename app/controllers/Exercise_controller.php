@@ -36,10 +36,10 @@ class Exercise_controller extends Controller{
     }
 	
 	public function viewPost(){
-		$workout = $this->model("exercise");
-		$workout->where('exercise_id', '=', substr($_GET['id'],0,1));
-		$result = $workout->get();
-		var_dump($result);
+		$exercise = $this->model("exercise");
+		$exercise->where('exercise_id', '=', substr($_GET['id'],0,1));
+		$result = $exercise->get();
+		$this->view('Exercise/display', ['exercise'=>$result[0]];
 	}
 	
 	//A function that performs an action of adding an exercise to favorites
@@ -91,6 +91,10 @@ class Exercise_controller extends Controller{
 	//A function that changes the rating of an exercise
 	public function rateExercise(){
 		if(isset($_POST['action'])){
+			$exercise = $this->model('exercise');
+			$exercise->where('exercise_id', '=', $_POST['exercise_id']);
+			$exercise = $exercise->get();
+			$exercise = $exercise[0];
 			$rating = $this->model('exercise_rating');
 			$rating->where('post_id', '=', $_POST['exercise_id']); 
 			$rating->where('user_id', '=', $_SESSION['userID']); 
@@ -98,10 +102,18 @@ class Exercise_controller extends Controller{
 			$rating->user_id = $_SESSION['userID'];
 			$rating->rating = $_POST['rating'];
 			if(count($rating->get())==0){
+				$exercise->number_of_ratings = $exercise->number_of_ratings + 1; 
+				$exercise->average_rating = (($exercise->average_rating + $_POST['rating'])
+						/$exercise->number_of_ratings);
 				$rating->insert();
-			}else{			
+			}else{
+				$result = $rating->get();
+				$result = $result[0];
+				$exercise->average_rating = (($exercise->average_rating + $_POST['rating']
+						- $result->rating )/$exercise->number_of_ratings);
 				$rating->update();
 			}
+			$exercise->update();
 		}
 		$this->view('Home/Main');
 	}

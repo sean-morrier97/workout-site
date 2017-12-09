@@ -44,5 +44,11 @@ class Helpers{
 		$results = $comments->get();
 		return $results;
 	}
+	
+	public function getWorkoutDetails($workout_id){
+		$details = $this->model('workout_detail');
+		$details->where('workout_id', '=', $workout_id);
+		return $details->get();
+	}
 }
 ?>

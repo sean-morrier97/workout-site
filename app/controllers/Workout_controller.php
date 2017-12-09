@@ -28,7 +28,7 @@ class Workout_controller extends Controller{
 		$workout = $this->model("workout");
 		$workout->where('workout_id', '=', substr($_GET['id'],0,1));
 		$result = $workout->get();
-		var_dump($result);
+		$this->view('Workout/display', ['workout'=>$result[0]];
 	}
 	//A function to add an exercise to a workout
 	public function addExercisePost(){
@@ -90,26 +90,31 @@ class Workout_controller extends Controller{
 	//A function to rate a workout
 	public function rateWorkout(){
 		if(isset($_POST['action'])){
-			$workout = $this->model('workout_rating');
-			$workout->where('user_id', '=', $_SESSION['userID']);
+			$workout = $this->model('exercise');
 			$workout->where('workout_id', '=', $_POST['workout_id']);
-			$workout->rating = $_POST['rating'];
-			$results = $workout->get();
-			if(count($results)!=0){
-				$workout->where('id', '=', $results[0]->id);
-				$workout->update();
+			$workout = $workout->get();
+			$workout = $workout[0];
+			$rating = $this->model('workout_rating');
+			$rating->where('workout_id', '=', $_POST['workout_id']); 
+			$rating->where('user_id', '=', $_SESSION['userID']); 
+			$rating->workout_id = $_POST['workout_id'];
+			$rating->user_id = $_SESSION['userID'];
+			$rating->rating = $_POST['rating'];
+			if(count($rating->get())==0){
+				$workout->number_of_ratings = $workout->number_of_ratings + 1; 
+				$workout->average_rating = (($workout->average_rating + $_POST['rating'])
+						/$workout->number_of_ratings);
+				$rating->insert();
 			}else{
-				$workout->workout_id = $_POST['workout_id']; 
-				$workout->user_id = $_SESSION['userID'];
-				$workout->insert();
+				$result = $rating->get();
+				$result = $result[0];
+				$workout->average_rating = (($workout->average_rating + $_POST['rating']
+						- $result->rating )/$workout->number_of_ratings);
+				$rating->update();
 			}
-			$this->view('Home/main');
+			$workout->update();
 		}
-	}
-	
-	//A function to view a workout
-	public function viewWorkout(){
-		$this->view('workout/display', ['workout_id'=>$_POST['workout_id']]);
+		$this->view('Home/main');
 	}
 }
 ?>
