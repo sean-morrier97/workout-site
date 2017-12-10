@@ -48,9 +48,9 @@ class User_controller extends Controller{
 	public function followUser(){
 		$following = $this->model('following');
 		$following->id = 0;
-		$following->followee_id = $_SESSION['userID'];
+		$following->follower_id = $_SESSION['userID'];
 		$following->where("followee_id", "=", $_SESSION['userID']);
-		$following->follower_id = $_POST['user_id'];
+		$following->followee_id = $_POST['user_id'];
 		$following->where("follower_id", "=",$_POST['user_id']);
 		if($_POST['privacy_setting'] == 1)
 			$following->status = 1;

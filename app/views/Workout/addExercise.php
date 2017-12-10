@@ -101,6 +101,8 @@ A view that creates a form to add an exercise to a workout
     document.getElementById("logoutForm").submit();
 	}
     </script>
+		<div class="default">
+	<div class="backgroundWhiteOverlay">
 <p>Add exercise to which workout out?</p>
 <form method="post" action="/Workout_controller/addExercisePost" class="form-horizontal">
 Exercise: 
@@ -126,3 +128,5 @@ if(count($result)==0){
 ?>
 
 </form>
+</div>
+</div>	

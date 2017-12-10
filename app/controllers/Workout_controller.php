@@ -24,11 +24,12 @@ class Workout_controller extends Controller{
 		}
     }
 	
+	//A function taht displays the posts
 	public function viewPost(){
 		$workout = $this->model("workout");
-		$workout->where('workout_id', '=', substr($_GET['id'],0,1));
+		$workout->where('workout_id', '=', substr($_GET['id'], 0, 1));
 		$result = $workout->get();
-		$this->view('Workout/display', ['workout'=>$result[0]];
+		$this->view('Workout/display', ['workout'=>$result[0]]);
 	}
 	//A function to add an exercise to a workout
 	public function addExercisePost(){
@@ -41,6 +42,7 @@ class Workout_controller extends Controller{
 		$this->view('Home/Main');
 	}
 	
+	//A function that redirects the user to another view
 	public function addExercise(){
 		$this->view('Workout/addExercise', ['exercise_id'=>$_POST['exercise_id']]);		
 	}
