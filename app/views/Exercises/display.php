@@ -104,7 +104,7 @@
 	<div class="backgroundWhiteOverlay">
 	<?php 
 	$exercise = $data['exercise'];
-	echo '<h1>' . $exercise->title . '</h1><br>Rating: ' . $exercise->average_rating . '<br><br>';	
+	echo '<h1>' . $exercise->title . '</h1><br>Rating: ' . Helpers::getExerciseRating($exercise->exercise_id) . '<br><br>';	
 	?>
 	</div>
 </div>

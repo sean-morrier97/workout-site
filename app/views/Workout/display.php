@@ -104,11 +104,10 @@
 	<div class="backgroundWhiteOverlay">
 	<?php 
 	$workout = $data['workout'];
-	echo '<h1>' . $workout->title . '</h1><br>Rating: ' . $workout->average_rating . '<br><br>';
+	echo '<h1>' . $workout->title . '</h1><h2>Rating: ' . Helpers::getWorkoutRating($workout->workout_id) . '</h2><br><br>';
 	$details = Helpers::getWorkoutDetails($workout->workout_id);
 	foreach($details as $item){
-		echo '<h4>' . getExerciseTitle($item->exercise_id) . '<br>
-			Sets: ' . $item->sets . '<br>Reps: '. $item->reps . '<h4><br>Rating: ';		
+		echo '<h4>' . Helpers::getExerciseTitle($item->exercise_id) . '<br>Sets: ' . $item->sets . '<br>Reps: '. $item->reps . '<h4>Rating: ' . Helpers::getExerciseRating($item->exercise_id) . '<br><br>';		
 	}	
 	?>
 	</div>

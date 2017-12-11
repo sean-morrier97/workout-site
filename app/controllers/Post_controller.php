@@ -23,9 +23,9 @@ class Post_controller extends Controller{
 		$post = $this->model('post');
 		$type = $_POST['type'];
 		if($type == 'exercise')
-			$post->URL = "http://$_SERVER[HTTP_HOST]/Workout_controller/viewPost?id=".$_POST['post_id'];
-		else
 			$post->URL = "http://$_SERVER[HTTP_HOST]/Exercise_controller/viewPost?id=".$_POST['post_id'];
+		else
+			$post->URL = "http://$_SERVER[HTTP_HOST]/Workout_controller/viewPost?id=".$_POST['post_id'];
 		$post->poster = $_SESSION['userID'];
 		$post->posted_date = "NOW()";
 		$post->likes = 0;

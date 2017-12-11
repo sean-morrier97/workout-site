@@ -34,10 +34,12 @@ class Workout_controller extends Controller{
 	//A function to add an exercise to a workout
 	public function addExercisePost(){
 		$workoutDetail = $this->model('workout_detail');
+		$workoutDetail->id = 0;
 		$workoutDetail->exercise_id = $_POST['exercise_id'];
 		$workoutDetail->workout_id = $_POST['workout_id'];
 		$workoutDetail->sets = $_POST['sets'];
 		$workoutDetail->reps = $_POST['reps'];
+		var_dump($workoutDetail);
 		$workoutDetail->insert();
 		$this->view('Home/Main');
 	}
@@ -92,10 +94,6 @@ class Workout_controller extends Controller{
 	//A function to rate a workout
 	public function rateWorkout(){
 		if(isset($_POST['action'])){
-			$workout = $this->model('exercise');
-			$workout->where('workout_id', '=', $_POST['workout_id']);
-			$workout = $workout->get();
-			$workout = $workout[0];
 			$rating = $this->model('workout_rating');
 			$rating->where('workout_id', '=', $_POST['workout_id']); 
 			$rating->where('user_id', '=', $_SESSION['userID']); 
@@ -103,18 +101,12 @@ class Workout_controller extends Controller{
 			$rating->user_id = $_SESSION['userID'];
 			$rating->rating = $_POST['rating'];
 			if(count($rating->get())==0){
-				$workout->number_of_ratings = $workout->number_of_ratings + 1; 
-				$workout->average_rating = (($workout->average_rating + $_POST['rating'])
-						/$workout->number_of_ratings);
 				$rating->insert();
 			}else{
 				$result = $rating->get();
 				$result = $result[0];
-				$workout->average_rating = (($workout->average_rating + $_POST['rating']
-						- $result->rating )/$workout->number_of_ratings);
 				$rating->update();
 			}
-			$workout->update();
 		}
 		$this->view('Home/main');
 	}

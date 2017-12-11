@@ -111,7 +111,7 @@ else if($data['resultType'] == 2){
 	//The loop that displays exercises
 	foreach($data['searchResults'] as $item){
 		$results = Helpers::getUsernameFromID($item->poster_id);
-		echo $item->title . ' Average Rating: ' . $item->number_of_ratings . '<br> Posted By: ' . $results[0]->username . ' Posted on: ' . $item->posted_date . 
+		echo $item->title . ' Average Rating: ' . Helpers::getExerciseRating($item->exercise_id) . '<br> Posted By: ' . $results[0]->username . ' Posted on: ' . $item->posted_date . 
 				'<form method="post" action="/Exercise_controller/addToFavorites" class="form-horizontal"> <input value="'. $item->exercise_id .'" type="hidden" name="exercise_id">' . 
 				'<input type="submit" class="btn btn-default" name="action" value="Add To Favorites" /> </form>'.
 				'<form method="get" action="/User_controller/createPR" class="form-horizontal"> <input value="'. $item->exercise_id .'" type="hidden" name="exercise_id">' . 
@@ -147,7 +147,7 @@ else if($data['resultType'] == 2){
 	//The loop that displays the workouts
 	foreach($data['searchResults'] as $item){
 		$results = Helpers::getUsernameFromID($item->poster_id);
-		echo $item->title . ' Average Rating: ' . $item->average_rating. '<br> Posted by: ' . $results[0]->username . ' Posted on: ' . $item->posted_date . '<br>
+		echo $item->title . ' Average Rating: ' . Helpers::getWorkoutRating($item->workout_id) . '<br> Posted by: ' . $results[0]->username . ' Posted on: ' . $item->posted_date . '<br>
 		<form method="post" action="/Workout_controller/addToFavorites" class="form-horizontal"> <input value="'. $item->workout_id .'" type="hidden" name="workout_id">' . 
 				'<input type="submit" class="btn btn-default" name="action" value="Add To Favorites" /> </form>
 				<form method="post" action="/Post_controller/share" class="form-horizontal">
